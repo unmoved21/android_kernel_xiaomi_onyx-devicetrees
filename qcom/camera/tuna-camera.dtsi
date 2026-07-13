@@ -1243,7 +1243,6 @@
 		sys-cache-uids = <71 72 73 74 75>;
 		sys-cache-concur = <1 1 1 0 0>;
 		enable-smart-qos;
-		enable-cam-drv = <(CAM_DDR_DRV | CAM_CLK_DRV)>;
 		rt-wr-priority-min = <4>;
 		rt-wr-priority-max = <5>;
 		rt-wr-priority-clamp = <6>;
