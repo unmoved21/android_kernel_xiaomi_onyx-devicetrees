@@ -480,12 +480,6 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
-
-			socd_trip: socd-trip {
-				temperature = <90>;
-				hysteresis = <0>;
-				type = "passive";
-			};
 		};
 	};
 };
