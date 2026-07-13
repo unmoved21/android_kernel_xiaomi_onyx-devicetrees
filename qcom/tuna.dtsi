@@ -2828,6 +2828,11 @@
 			status = "disabled";
 		};
 
+		mca_adsp_glink: mca,adsp_glink {
+			compatible = "mca,adsp_glink";
+			status = "disabled";
+		};
+
 		ucsi: qcom,ucsi {
 			compatible = "qcom,ucsi-glink";
 			connector {
