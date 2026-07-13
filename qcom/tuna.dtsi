@@ -2136,13 +2136,6 @@
 		status = "ok";
 	};
 
-	qcom_ramoops {
-		compatible = "qcom,ramoops";
-		memory-region = <&ramoops_mem>;
-		pmsg-size = <0x200000>;
-		mem-type = <2>;
-	};
-
 	qcom,mpm2-sleep-counter@c221000 {
 		compatible = "qcom,mpm2-sleep-counter";
 		reg = <0xc221000 0x1000>;
