@@ -1,0 +1,374 @@
+#include "tuna-audio-mtp.dtsi"
+#include "onyx-audio-pinctrl.dtsi"
+
+&lpass_cdc {
+    qcom,num-macros = <3>;
+};
+
+&wcd9378_tx_slave {
+	status = "okay";
+};
+
+&wsa_macro {
+    status = "disabled";
+};
+
+&wsa884x_0221 {
+    status = "disabled";
+};
+
+&wsa_spkr_en02 {
+    status = "disabled";
+};
+
+&wsa_spkr_en13 {
+    status = "disabled";
+};
+
+&cdc_dmic01_gpios {
+    status = "disabled";
+};
+
+&cdc_dmic23_gpios {
+    status = "disabled";
+};
+
+&cdc_quin_mi2s_gpios {
+    status = "ok";
+};
+
+&fm_i2s1_gpios {
+    status = "disabled";
+};
+
+&lpass_bt_swr {
+	status = "ok";
+};
+
+&swr0 {
+    status = "disabled";
+
+    wsa883x_0221: wsa883x@02170221 {
+        compatible = "qcom,wsa883x";
+        reg = <0x2 0x2170221>;
+        qcom,spkr-sd-n-node = <&wsa_spkr_en02>;
+        qcom,lpass-cdc-handle = <&lpass_cdc>;
+        cdc-vdd-1p8-supply = <&L15B>;
+        qcom,cdc-vdd-1p8-voltage = <1800000 1800000>;
+        qcom,cdc-vdd-1p8-current = <20000>;
+        qcom,cdc-static-supplies = "cdc-vdd-1p8";
+        sound-name-prefix = "SpkrLeft";
+        status = "disabled";
+    };
+
+    wsa883x_0222: wsa883x@02170222 {
+        compatible = "qcom,wsa883x";
+        reg = <0x2 0x2170222>;
+        qcom,spkr-sd-n-node = <&wsa_spkr_en13>;
+        qcom,lpass-cdc-handle = <&lpass_cdc>;
+        cdc-vdd-1p8-supply = <&L15B>;
+        qcom,cdc-vdd-1p8-voltage = <1800000 1800000>;
+        qcom,cdc-vdd-1p8-current = <20000>;
+        qcom,cdc-static-supplies = "cdc-vdd-1p8";
+        sound-name-prefix = "SpkrRight";
+        status = "disabled";
+    };
+};
+
+
+&wsa884x_0220 {
+	status = "disabled";
+};
+
+&soc {
+    si_pa_L: si_pa_L {
+        channel_num = <0x0>;
+        compatible = "si,sia91xx";
+        pinctrl-0 = <&sia91xx_gpio_L>;
+        pinctrl-names = "si_pa_gpio";
+        si,is_digital_pa = <0x1>;
+        si,si_pa_disable_pin = <0x0>;
+        si,si_pa_reset = <&tlmm 0x7C 0x0>;
+        si,si_pa_type = "sia9187";
+        spksw-gpio = <&tlmm 0xB7 0x0>;
+    };
+    si_pa_R: si_pa_R {
+        channel_num = <0x1>;
+        compatible = "si,sia91xx";
+        pinctrl-0 = <&sia91xx_gpio_R>;
+        pinctrl-names = "si_pa_gpio";
+        si,is_digital_pa = <0x1>;
+        si,si_pa_disable_pin = <0x0>;
+        si,si_pa_reset = <&tlmm 0x80 0x0>;
+        si,si_pa_type = "sia9187";
+    };
+};
+
+&wcd9378_codec {
+	status = "okay";
+	qcom,cdc-micbias1-mv = <2750>;
+	qcom,cdc-micbias2-mv = <2750>;
+	qcom,cdc-micbias3-mv = <2750>;
+	qcom,cdc-micbias4-mv = <2750>;
+};
+
+&qupv3_se15_i2c {
+    status = "ok";
+    aw882xx_smartpa@34 {
+        aw-cali-mode = "none";
+        aw-re-max = <0x7530>;
+        aw-re-min = <0xFA0>;
+        compatible = "awinic,aw882xx_smartpa";
+        dc-flag = <0x0>;
+        irq-gpio = <&tlmm 0x7F 0x2008>;
+        monitor-mode = "hal_monitor";
+        pll-check-disable;
+        reg = <0x34>;
+        reset-gpio = <&tlmm 0x7C 0x0>;
+        sound-channel = <0x0>;
+        spksw-gpio = <&tlmm 0xB7 0x0>;
+        status = "okay";
+        sync-load = <0x1>;
+    };
+    aw882xx_smartpa@35 {
+        aw-cali-mode = "none";
+        aw-re-max = <0x7530>;
+        aw-re-min = <0xFA0>;
+        compatible = "awinic,aw882xx_smartpa";
+        dc-flag = <0x0>;
+        irq-gpio = <&tlmm 0x81 0x2008>;
+        monitor-mode = "hal_monitor";
+        pll-check-disable;
+        reg = <0x35>;
+        reset-gpio = <&tlmm 0x80 0x0>;
+        sound-channel = <0x1>;
+        status = "okay";
+        sync-load = <0x1>;
+    };
+
+    sipa_i2c_L: sipa_i2c_L@6C {
+        compatible = "si,sia91xx-i2c";
+        reg = <0x6C>;
+        si,sipa-dev = <&si_pa_L>;
+        sound-name-prefix = "SpkrLeft";
+    };
+    sipa_i2c_R: sipa_i2c_R@6D {
+        compatible = "si,sia91xx-i2c";
+        reg = <0x6D>;
+        si,sipa-dev = <&si_pa_R>;
+        sound-name-prefix = "SpkrRight";
+    };
+};
+
+&qupv3_se5_i2c {
+    status = "ok";
+    aw8697_haptic@5A {
+        aw86927_vib_brk_bst_md = <0>;
+        aw86927_vib_bst_vol_default = <95>;
+        aw86927_vib_bst_vol_ram = <95>;
+        aw86927_vib_bst_vol_rtp = <95>;
+        aw86927_vib_cont_bemf_set = <2>;
+        aw86927_vib_cont_brk_gain = <8>;
+        aw86927_vib_cont_brk_time = <8>;
+        aw86927_vib_cont_bst_brk_gain = <5>;
+        aw86927_vib_cont_drv1_lvl = <127>;
+        aw86927_vib_cont_drv1_time = <4>;
+        aw86927_vib_cont_drv2_lvl = <54>;
+        aw86927_vib_cont_drv2_time = <6>;
+        aw86927_vib_cont_drv_width = <106>;
+        aw86927_vib_cont_track_margin = <12>;
+        aw86927_vib_cont_tset = <6>;
+        aw86927_vib_cont_wait_num = <6>;
+        aw86927_vib_d2s_gain = <4>;
+        aw86927_vib_f0_cali_percen = <7>;
+        aw86927_vib_f0_pre = <1700>;
+        aw86927_vib_mode = <0>;
+        aw86927_vib_trig_config = <0 0 0 1 0 2 0 0 0 0 0 1 0 2 0 0 0 0 0 1 0 2 0 0>;
+        aw8697_vib_bemf_config = <0 8 3 248>;
+        aw8697_vib_bst_vol_default = <14>;
+        aw8697_vib_bst_vol_ram = <14>;
+        aw8697_vib_bst_vol_rtp = <14>;
+        aw8697_vib_bstdbg = <48 235 212 0 0 0>;
+        aw8697_vib_cont_drv_lev = <60>;
+        aw8697_vib_cont_drv_lvl_ov = <60>;
+        aw8697_vib_cont_num_brk = <3>;
+        aw8697_vib_cont_td = <239>;
+        aw8697_vib_cont_zc_thr = <2296>;
+        aw8697_vib_f0_cali_percen = <7>;
+        aw8697_vib_f0_coeff = <260>;
+        aw8697_vib_f0_pre = <1700>;
+        aw8697_vib_f0_trace_parameter = <9 3 1 31>;
+        aw8697_vib_mode = <0>;
+        aw8697_vib_r_spare = <104>;
+        aw8697_vib_sw_brake = <44>;
+        aw8697_vib_trig_config = <0 1 0 1 2 0 1 0 1 2 0 1 0 1 2>;
+        aw8697_vib_tset = <26>;
+        compatible = "awinic,awinic_haptic";
+        irq-gpio = <&tlmm 135 0>;
+        pinctrl-0 = <&awinic_gpio_reset>;
+        pinctrl-1 = <&awinic_gpio_reset_output_high>;
+        pinctrl-2 = <&awinic_gpio_int>;
+        pinctrl-names = "awinic_reset_reset", "awinic_reset_active", "awinic_interrupt_active";
+        reg = <90>;
+        reset-gpio = <&tlmm 38 0>;
+        status = "ok";
+        vib_effect_id_boundary = <10>;
+        vib_effect_max = <197>;
+        vib_rtp_time = <20 20 20 20 20 20 20 20 20000 15000 15000 20000 25000 15000 30000 25000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000 20000>;
+        wf_0 {
+            qcom,effect-id = <0>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_1 {
+            qcom,effect-id = <1>;
+            qcom,wf-brake-pattern = [03 01 00 00];
+            qcom,wf-pattern = [7E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_2 {
+            qcom,effect-id = <2>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [7E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_3 {
+            qcom,effect-id = <3>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_4 {
+            qcom,effect-id = <4>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <28000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_5 {
+            qcom,effect-id = <5>;
+            qcom,wf-brake-pattern = [03 03 01 00];
+            qcom,wf-pattern = [7E 7E 7E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_6 {
+            qcom,effect-id = <6>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_7 {
+            qcom,effect-id = <7>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_8 {
+            qcom,effect-id = <8>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+        wf_9 {
+            qcom,effect-id = <9>;
+            qcom,wf-brake-pattern = [02 01 00 00];
+            qcom,wf-pattern = [3E 3E];
+            qcom,wf-play-rate-us = <20000>;
+            qcom,wf-vmax-mv = <3600>;
+        };
+    };
+    fsa4480: fsa4480@42 {
+        compatible = "qcom,fsa4480-i2c";
+        reg = <0x42>;
+        status = "ok";
+    };
+    sih6887_haptic@6B {
+        compatible = "silicon,sih_haptic_688X";
+        interrupt = <0x1A 0x1>;
+        irq-gpio = <&tlmm 0x87 0x0>;
+        lra_name = "0809";
+        pinctrl-0 = <&sih_reset_low>;
+        pinctrl-1 = <&sih_reset_high>;
+        pinctrl-2 = <&sih_interrupt>;
+        pinctrl-names = "sih_reset_reset", "sih_reset_active", "sih_interrupt_active";
+        reg = <0x6B>;
+        reset-gpio = <&tlmm 0x26 0x0>;
+        vib_bst_vol_default = <0x5C>;
+        vib_effect_id_boundary = <0xA>;
+        vib_effect_max = <0xC5>;
+        vib_f0_pre = <0x6A4>;
+    };
+};
+
+&tuna_snd {
+    /delete-property/ qcom,sec-mi2s-gpios;
+    qcom,quin-mi2s-gpios = <&cdc_quin_mi2s_gpios>;
+    qcom,tdm-audio-intf = <1>;
+    qcom,tdm-clk-attribute = <0x4>, <0x4>, <0x4>, <0x4>, <0x4>, <0x4>, <0x4>, <0x4>;
+    qcom,tdm-max-slots = <4>;
+    qcom,uart-audio-sw-gpio = <&sbu_uart_en>;
+    qcom,wcd-disable-legacy-surge;
+    qcom,msm-mbhc-usbc-audio-supported = <1>;
+    qcom,msm-mbhc-hphl-swh = <0>;
+    qcom,msm-mbhc-gnd-swh = <0>;
+    qcom,wsa-max-devs = <0>;
+    swr-haptics-unsupported;
+    fsa4480-i2c-handle = <&fsa4480>;
+    qcom,audio-routing =
+        "AMIC1", "Analog Mic1",
+        "AMIC1", "MIC BIAS1",
+        "AMIC2", "Analog Mic2",
+        "AMIC2", "MIC BIAS2",
+        "AMIC3", "Analog Mic3",
+        "AMIC3", "MIC BIAS3",
+        "AMIC4", "Analog Mic4",
+        "AMIC4", "MIC BIAS3",
+        "VA AMIC1", "Analog Mic1",
+        "VA AMIC1", "VA MIC BIAS1",
+        "VA AMIC2", "Analog Mic2",
+        "VA AMIC2", "VA MIC BIAS2",
+        "VA AMIC3", "Analog Mic3",
+        "VA AMIC3", "VA MIC BIAS3",
+        "VA AMIC4", "Analog Mic4",
+        "VA AMIC4", "VA MIC BIAS3",
+        "TX DMIC0", "Digital Mic0",
+        "TX DMIC0", "MIC BIAS3",
+        "TX DMIC1", "Digital Mic1",
+        "TX DMIC1", "MIC BIAS3",
+        "TX DMIC2", "Digital Mic2",
+        "TX DMIC2", "MIC BIAS1",
+        "TX DMIC3", "Digital Mic3",
+        "TX DMIC3", "MIC BIAS1",
+        "IN1_HPHL", "HPHL_OUT",
+        "IN2_HPHR", "HPHR_OUT",
+        "IN3_AUX", "AUX_OUT",
+        "RX_TX DEC0_INP", "TX DEC0 MUX",
+        "RX_TX DEC1_INP", "TX DEC1 MUX",
+        "RX_TX DEC2_INP", "TX DEC2 MUX",
+        "RX_TX DEC3_INP", "TX DEC3 MUX",
+        "VA SWR_INPUT", "VA_SWR_CLK",
+        "VA_AIF1 CAP", "VA_SWR_CLK",
+        "VA_AIF2 CAP", "VA_SWR_CLK",
+        "VA_AIF3 CAP", "VA_SWR_CLK",
+        "VA DMIC0", "Digital Mic0",
+        "VA DMIC1", "Digital Mic1",
+        "VA DMIC2", "Digital Mic2",
+        "VA DMIC3", "Digital Mic3",
+        "VA DMIC0", "VA MIC BIAS3",
+        "VA DMIC1", "VA MIC BIAS3",
+        "VA DMIC2", "VA MIC BIAS1",
+        "VA DMIC3", "VA MIC BIAS1";
+};
+
+&wcd_usbss {
+    status = "disabled";
+};

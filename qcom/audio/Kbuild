@@ -43,7 +43,8 @@ dtbo-y += sun-audio.dtbo \
                 tuna7-audio-mtp.dtbo \
                 tuna-audio-mtp-qmp1000.dtbo \
                 tuna-audio-qrd.dtbo \
-                tuna-audio-rcm.dtbo
+                tuna-audio-rcm.dtbo \
+                onyx-audio-mtp.dtbo
 endif
 
 
