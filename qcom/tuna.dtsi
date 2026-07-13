@@ -935,6 +935,8 @@
 	adsp_sleepmon: adsp-sleepmon {
 		compatible = "qcom,adsp-sleepmon";
 		qcom,rproc-handle = <&adsp_pas>;
+		qcom,wait_time_lpm = <45>;
+		qcom,wait_time_lpi = <45>;
 	};
 
 	pcie_pdc: pdc@b360000 {
