@@ -9,7 +9,8 @@ dtbo-$(CONFIG_ARCH_TUNA)  += tuna-camera.dtbo
 
 dtbo-$(CONFIG_ARCH_TUNA)  += tuna-camera-sensor-mtp.dtbo \
 				tuna-camera-sensor-cdp.dtbo \
-				tuna-camera-sensor-qrd.dtbo
+				tuna-camera-sensor-qrd.dtbo \
+				onyx-sm8735-camera-sensor.dtbo
 
 dtbo-$(CONFIG_ARCH_KERA)  += kera-camera.dtbo
 dtbo-$(CONFIG_ARCH_KERA)  += kera-camera-sensor-mtp.dtbo \
