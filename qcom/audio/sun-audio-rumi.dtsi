@@ -1,0 +1,18 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) 2023-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ */
+
+#include "sun-audio-overlay.dtsi"
+
+&swr_haptics {
+	status = "disabled";
+};
+
+
+&sun_snd {
+	compatible = "qcom,sun-asoc-snd-stub";
+	asoc-codec = <&stub_codec>;
+	asoc-codec-names = "msm-stub-codec.1";
+	qcom,wcn-bt-ext = <1>;
+};
