@@ -2,6 +2,9 @@
 };
 
 &soc {
+	mca_parallel_cyclecount_para: mca_parallel_cyclecount_para {
+	};
+
 	mca_panel: mca_panel {
 		compatible = "mca,mca_panel";
 		status = "ok";
@@ -45,6 +48,7 @@
 		vbat_high_hyst = <50>;
 		vbat_low_hyst = <50>;
 		vbat_low_cold_hyst = <50>;
+		jeita_hot_termination_hyst = <0>;
 		volt_para1 =
 			"4200", "670",
 			"4500", "450";
@@ -111,6 +115,9 @@
 
 	mca_strategy_buckchg_class: mca_strategy_buckchg_class {
 		compatible = "mca,strategy_buckchg";
+		allow_start_ffc_batt_soc_thr = <95>;
+		sw_cv_fcc_step = <50>;
+		sw_cv_fv_step = <5>;
 		support_multi_buck = <0>;
 		in_dcp = <1500>;
 		in_pd = <1600>;
@@ -149,6 +156,8 @@
 
 	mca_strategy_quick_charge: mca_strategy_quick_charge {
 		compatible = "mca,quick_charger";
+		mult_to_single_count = <0>;
+		support_ichg_cutoff_priority = <1>;
 		status = "disabled";
 		batt_type = <0>;
 		cp_type = <0>;
@@ -274,6 +283,7 @@
 	mca_strategy_basic_wireless_class: mca_strategy_basic_wireless_class {
 		compatible = "mca,basic_wireless";
 		support_q_value = <0>;
+		support_q_tx = <1 1 0>;
 		support_multi_buck = <0>;
 		//low_inductance_tx_50W, low_inductance_tx_80W
 		tx_q1 = /bits/ 8 <0x15 0x15>;
@@ -432,6 +442,7 @@
 			"0x09080207", "adapter_para_9827",	/* XIAOMI_TX_UUID_ZIMI_CAR_30W */
 			"0x06020801", "adapter_para_6281",	/* XIAOMI_TX_UUID_ZIMI_CAR_20W */
 			"0x090C0201", "adapter_para_9C21",	/* XIAOMI_TX_UUID_KUKE_CAR_50W */
+			"0x0e0e0205", "adapter_para_EE25",
 			"0x0C090908", "adapter_para_C998",	/* XIAOMI_TX_UUID_MULTI_COIL2_20W */
 			"0x0C090906", "adapter_para_C996",	/* XIAOMI_TX_UUID_MULTI_COIL_20W */
 			"0x09010506", "adapter_para_9156",	/* XIAOMI_TX_UUID_MOVING_PLATE_20W */
@@ -450,6 +461,7 @@
 		adapter_para_9827 = "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0";
 		adapter_para_6281 = "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0";
 		adapter_para_9C21 = "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0";
+		adapter_para_EE25 = "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0";
 		adapter_para_C998 = "0", "0", "1", "0", "0", "0", "0", "0", "0", "0", "0";
 		adapter_para_C996 = "0", "0", "1", "0", "0", "0", "0", "0", "0", "0", "0";
 		adapter_para_9156 = "0", "0", "1", "0", "0", "0", "0", "0", "0", "0", "0";
@@ -460,6 +472,7 @@
 
 	mca_strategy_quick_wireless_class: mca_strategy_quick_wireless_class {
 		compatible = "mca,quick_wireless";
+		sw_cv_taper_reduce_cv = <0>;
 		status = "disabled";
 		batt_type = <0>;
 		cp_type = <0>;
@@ -1633,6 +1646,7 @@ mca_sc96281_fod_data: mca_sc96281_fod_data {
 	mca_ibat_ocp_mon: mca_ibat_ocp_mon {
 		compatible = "mca,ibat_ocp_monitor";
 		fg_type = <1>;
+		ocp_threshold = <0x8d9a00 0x360420>;
 		status = "disabled";
 	};
 };
