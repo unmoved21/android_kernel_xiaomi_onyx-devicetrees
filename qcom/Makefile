@@ -14,6 +14,7 @@ add-overlays = $(foreach o,$1,$(foreach b,$2,$(eval $(basename $b)-$(basename $o
 #
 
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
+ifeq ($(CONFIG_MI_HARDWARE_ID),)
 
 SUN_BASE_DTB += sun.dtb sun-v2.dtb sun-tp.dtb sun-tp-v2.dtb
 SUN_APQ_BASE_DTB += sunp.dtb sunp-v2.dtb sunp-tp.dtb sunp-tp-v2.dtb
@@ -111,6 +112,16 @@ sun-dtb-$(CONFIG_ARCH_KERA) +=  \
 sun-overlays-dtb-$(CONFIG_ARCH_KERA) += $(KERA_BOARDS) $(NOAPQ_KERA_BOARDS) $(KERA_BASE_DTB) $(KERA_APQ_BASE_DTB)
 
 dtb-y += $(sun-dtb-y)
+else
+CLIFFS_BASE_DTB += cliffs.dtb cliffs7.dtb
+TUNA_BASE_DTB += tuna.dtb tuna7.dtb
+XIAOMI_TUNA_BOARDS += \
+		onyx-sm8735-overlay.dtbo
+
+onyx-overlays-dtb-$(CONFIG_ARCH_TUNA) += $(XIAOMI_TUNA_BOARDS) $(TUNA_BASE_DTB)
+
+dtb-y += $(onyx-overlays-dtb-y)
+endif
 
 QCS610_BASE_DTB += qcs610.dtb
 
