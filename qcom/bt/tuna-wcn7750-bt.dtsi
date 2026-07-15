@@ -95,6 +95,7 @@
 	status = "ok";
 	nq@64 {
 		compatible = "rtc6226";
+		status = "disabled";
 		reg = <0x64>;
 		fmint-gpio = <&tlmm 29 0>;
 		vdd-supply = <&L18B>;
