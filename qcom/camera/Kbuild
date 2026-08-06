@@ -1,4 +1,4 @@
-DTC_INCLUDE += $(srctree)/../sm8735-modules/qcom/opensource/camera-kernel
+DTC_INCLUDE += $(srctree)/../onyx-modules/qcom/opensource/camera-kernel
 
 ifeq ($(CONFIG_ARCH_SUN), y)
 include $(srctree)/$(src)/config/sun.mk
