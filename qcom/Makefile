@@ -6,6 +6,8 @@
 # Combined dtb target is also generated using the fdt_overlay tool.
 # dtb-y += <base>-<board>.dtb
 
+ifneq (,)
+
 add-overlays = $(foreach o,$1,$(foreach b,$2,$(eval $(basename $b)-$(basename $o)-dtbs = $b $o) $(basename $b)-$(basename $o).dtb))
 
 # sun-dtb-y is list of DTBs to install when doing non-overlay build
@@ -14,7 +16,6 @@ add-overlays = $(foreach o,$1,$(foreach b,$2,$(eval $(basename $b)-$(basename $o
 #
 
 ifneq ($(CONFIG_ARCH_QTI_VM), y)
-ifeq ($(CONFIG_MI_HARDWARE_ID),)
 
 SUN_BASE_DTB += sun.dtb sun-v2.dtb sun-tp.dtb sun-tp-v2.dtb
 SUN_APQ_BASE_DTB += sunp.dtb sunp-v2.dtb sunp-tp.dtb sunp-tp-v2.dtb
@@ -77,8 +78,10 @@ sun-dtb-$(CONFIG_ARCH_TUNA) +=  \
 sun-overlays-dtb-$(CONFIG_ARCH_TUNA) += $(TUNA_BOARDS) $(NOAPQ_TUNA_BOARDS) $(TUNA_BASE_DTB) $(TUNA_APQ_BASE_DTB)
 dtb-y += $(sun-dtb-y)
 
-KERA_BASE_DTB += kera.dtb
-KERA_APQ_BASE_DTB += kerap.dtb
+ifeq ($(CONFIG_ARCH_KERA_LE), y)
+
+KERA_BASE_DTB += kera.dtb kera-iot.dtb kera-qmb.dtb
+KERA_APQ_BASE_DTB += kerap.dtb kerap-iot.dtb kerap-qna.dtb
 KERA_BOARDS += \
 		kera-atp-overlay.dtbo \
 		kera-mtp-qca6750-ufs4-overlay.dtbo \
@@ -92,6 +95,7 @@ KERA_BOARDS += \
 		kera-cdp-qca6750-ufs4-overlay.dtbo \
 		kera-iot-cdp-qca6750-ufs4-overlay.dtbo \
 		kera-cdp-qca6750-ufs4-slt-overlay.dtbo \
+		kera-cdp-emmc-overlay.dtbo \
 		kera-qrd-wcn7750-ufs4-overlay.dtbo \
 		kera-qrd-wcn7750-ufs2-overlay.dtbo \
 		kera-qrd-wcn7750-ufs3-overlay.dtbo \
@@ -101,10 +105,70 @@ KERA_BOARDS += \
 		kera-rcm-qca6750-ufs3-overlay.dtbo \
 		kera-rcm-wcn7750-ufs2-overlay.dtbo \
 		kera-rcm-wcn7750-ufs3-overlay.dtbo \
-		kera-rcm-wcn7750-ufs4-overlay.dtbo
+		kera-rcm-wcn7750-ufs4-overlay.dtbo \
+		kera-rcm-wcn7750-emmc-overlay.dtbo \
+		kera-rcm-wcn7750-ufs3-no-display-overlay.dtbo \
+		kera-rcm-wcn7750-ufs4-no-display-overlay.dtbo \
+		kera-rcm-wcn7750-emmc-no-display-overlay.dtbo \
+		kera-idp-emmc-overlay.dtbo \
+		kera-idp-ufs3-overlay.dtbo \
+		kera-evk-emmc-overlay.dtbo \
+		kera-evk-emmc-hdmiearc-dmic-overlay.dtbo \
+		kera-evk-emmc-hdmiearc-hat-overlay.dtbo \
+		kera-evk-emmc-lt9611uxd-dmic-overlay.dtbo \
+		kera-evk-emmc-lt9611uxd-hat-overlay.dtbo \
+		kera-evk-emmc-wcd9378-dmic-overlay.dtbo \
+		kera-evk-emmc-wcd9378-hat-overlay.dtbo
 
 NOAPQ_KERA_BOARDS += \
 		kera-rumi-overlay.dtbo
+
+else
+
+KERA_BASE_DTB += kera.dtb kera-iot.dtb kera-qmb.dtb
+KERA_APQ_BASE_DTB += kerap.dtb kerap-iot.dtb kerap-qna.dtb
+KERA_BOARDS += \
+		kera-atp-overlay.dtbo \
+		kera-mtp-qca6750-ufs4-overlay.dtbo \
+		kera-mtp-qca6750-ufs3-overlay.dtbo \
+		kera-mtp-qca6750-qmp1000-overlay.dtbo \
+		kera-mtp-wcn7750-qmp1000-overlay.dtbo \
+		kera-mtp-wcn7750-ufs4-overlay.dtbo \
+		kera-mtp-wcn7750-ufs3-overlay.dtbo \
+		kera-cdp-qca6750-ufs2-overlay.dtbo \
+		kera-cdp-qca6750-ufs3-overlay.dtbo \
+		kera-cdp-qca6750-ufs4-overlay.dtbo \
+		kera-iot-cdp-qca6750-ufs4-overlay.dtbo \
+		kera-cdp-qca6750-ufs4-slt-overlay.dtbo \
+		kera-cdp-emmc-overlay.dtbo \
+		kera-qrd-wcn7750-ufs4-overlay.dtbo \
+		kera-qrd-wcn7750-ufs2-overlay.dtbo \
+		kera-qrd-wcn7750-ufs3-overlay.dtbo \
+		kera-qrd-qca6750-ufs2-overlay.dtbo \
+		kera-rcm-qca6750-ufs4-overlay.dtbo \
+		kera-rcm-qca6750-ufs2-overlay.dtbo \
+		kera-rcm-qca6750-ufs3-overlay.dtbo \
+		kera-rcm-wcn7750-ufs2-overlay.dtbo \
+		kera-rcm-wcn7750-ufs3-overlay.dtbo \
+		kera-rcm-wcn7750-ufs4-overlay.dtbo \
+		kera-rcm-wcn7750-emmc-overlay.dtbo \
+		kera-rcm-wcn7750-ufs3-no-display-overlay.dtbo \
+		kera-rcm-wcn7750-ufs4-no-display-overlay.dtbo \
+		kera-rcm-wcn7750-emmc-no-display-overlay.dtbo \
+		kera-idp-emmc-overlay.dtbo \
+		kera-idp-ufs3-overlay.dtbo \
+		kera-evk-emmc-overlay.dtbo \
+		kera-evk-emmc-hdmiearc-dmic-overlay.dtbo \
+		kera-evk-emmc-hdmiearc-hat-overlay.dtbo \
+		kera-evk-emmc-lt9611uxd-dmic-overlay.dtbo \
+		kera-evk-emmc-lt9611uxd-hat-overlay.dtbo \
+		kera-evk-emmc-wcd9378-dmic-overlay.dtbo \
+		kera-evk-emmc-wcd9378-hat-overlay.dtbo
+
+NOAPQ_KERA_BOARDS += \
+		kera-rumi-overlay.dtbo
+
+endif
 
 sun-dtb-$(CONFIG_ARCH_KERA) +=  \
 	$(call add-overlays, $(KERA_BOARDS) $(NOAPQ_KERA_BOARDS),$(KERA_BASE_DTB)) \
@@ -112,16 +176,6 @@ sun-dtb-$(CONFIG_ARCH_KERA) +=  \
 sun-overlays-dtb-$(CONFIG_ARCH_KERA) += $(KERA_BOARDS) $(NOAPQ_KERA_BOARDS) $(KERA_BASE_DTB) $(KERA_APQ_BASE_DTB)
 
 dtb-y += $(sun-dtb-y)
-else
-CLIFFS_BASE_DTB += cliffs.dtb cliffs7.dtb
-TUNA_BASE_DTB += tuna.dtb tuna7.dtb
-XIAOMI_TUNA_BOARDS += \
-		onyx-sm8735-overlay.dtbo
-
-onyx-overlays-dtb-$(CONFIG_ARCH_TUNA) += $(XIAOMI_TUNA_BOARDS) $(TUNA_BASE_DTB)
-
-dtb-y += $(onyx-overlays-dtb-y)
-endif
 
 QCS610_BASE_DTB += qcs610.dtb
 
@@ -196,7 +250,7 @@ parrot-dtb-$(CONFIG_ARCH_PARROT) += \
 parrot-overlays-dtb-$(CONFIG_ARCH_PARROT) += $(PARROT_BOARDS) $(PARROT_BASE_DTB) $(PARROT_4GB_BOARDS) $(PARROT_4GB_BASE_DTB)
 dtb-y += $(parrot-dtb-y)
 
-RAVELIN_BASE_DTB += ravelin.dtb ravelinp.dtb ravelin-sg.dtb ravelinp-sg.dtb montague.dtb montaguep.dtb
+RAVELIN_BASE_DTB += ravelin.dtb ravelinp.dtb ravelin-sg.dtb ravelinp-sg.dtb montague.dtb montaguep.dtb montague-qmb.dtb montague-cqm-fp1.dtb montague-cqm-fp2.dtb montague-cqm-fp3.dtb montague-cqs-fp1.dtb montague-cqs-fp2.dtb montague-cqs-fp3.dtb
 RAVELIN_4GB_BASE_DTB += ravelin-4gb.dtb ravelinp-4gb.dtb ravelin-sg.dtb ravelinp-sg.dtb montague-4gb.dtb montaguep-4gb.dtb
 
 RAVELIN_BOARDS += \
@@ -378,6 +432,8 @@ parrot_tuivm-dtb-$(CONFIG_ARCH_QTI_VM) +=  ravelin-vm-rumi.dtb \
 dtb-y += $(parrot_tuivm-dtb-y)
 
 endif
+endif
+
 endif
 
 always-y        := $(dtb-y)

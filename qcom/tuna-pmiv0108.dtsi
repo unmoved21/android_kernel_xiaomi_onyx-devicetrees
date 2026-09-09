@@ -37,7 +37,7 @@
 
 &pmk8550_vadc {
 	pinctrl-names = "default";
-	pinctrl-0 = <&charger_skin_therm_default>;
+	pinctrl-0 = <&charger_skin_therm_default &sys_therm_6_gpio7_default>;
 
 	pmiv010x_ref_gnd {
 		reg = <PMIV0104_ADC5_GEN3_OFFSET_REF>;
@@ -260,6 +260,11 @@
 
 	socd {
 		cooling-maps {
+			socd_apc1 {
+				trip = <&socd_trip>;
+				cooling-device = <&APC1_MX_CX_PAUSE 1 1>;
+			};
+
 			socd_cdsp1 {
 				trip = <&socd_trip>;
 				cooling-device = <&cdsp_sw 4 4>;

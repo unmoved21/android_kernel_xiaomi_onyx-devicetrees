@@ -36,12 +36,13 @@
 	aliases: aliases {
 		serial0 = &qupv3_se7_2uart;
 		hsuart0 = &qupv3_se14_4uart;
+		hsuart3	= &qupv3_se15_4uart;
 		ufshc1 = &ufshc_mem; /* Embedded UFS Slot */
 		mmc1 = &sdhc_2; /* SDC2 SD card slot */
 	};
 
 	chosen: chosen {
-		bootargs = "log_buf_len=512K loglevel=6 cpufreq.default_governor=performance sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc kpti=0 swiotlb=0 loop.max_part=7 irqaffinity=0-1 pcie_ports=compat printk.console_no_auto_verbose=1 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 kernel.panic_on_rcu_stall=1 disable_dma32=on cgroup_disable=pressure fw_devlink.strict=1 can.stats_timer=0 pci-msm-drv.pcie_sm_regs=0x1D07000,0x1040,0x1048,0x3000,0x1 ftrace_dump_on_oops slub_debug=-";
+		bootargs = "log_buf_len=512K loglevel=6 cpufreq.default_governor=performance sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc kpti=0 swiotlb=0 loop.max_part=7 irqaffinity=0-1 pcie_ports=compat printk.console_no_auto_verbose=0 kasan=off rcupdate.rcu_expedited=1 rcu_nocbs=0-7 kernel.panic_on_rcu_stall=1 disable_dma32=on cgroup_disable=pressure fw_devlink.strict=1 can.stats_timer=0 pci-msm-drv.pcie_sm_regs=0x1D07000,0x1040,0x1048,0x3000,0x1 ftrace_dump_on_oops slub_debug=- restrict_cma_redirect=false";
 		stdout-path = "serial0:115200n8";
 	};
 
@@ -270,14 +271,6 @@
 	};
 
 	reserved_memory: reserved-memory { };
-
-	mem-offline {
-		compatible = "qcom,mem-offline";
-		status="disabled";
-		offline-sizes = <0x2 0xc0000000 0x1 0x0>;
-		granule = <512>;
-		qcom,qmp = <&aoss_qmp>;
-	};
 
 	soc: soc { };
 
@@ -929,6 +922,7 @@
 			/* Need to update different value for V2 device */
 			qcom,freq-threshold-idx = <11>, <10>;
 			qcom,frequency-threshold-residency = <5000>, <5000>;
+			heuristics_scid_thread_interval = <16000>;
 			qcom,scid-heuristics-enabled;
 		};
 	};
@@ -2214,6 +2208,7 @@
 		compatible = "qcom,ramoops";
 		memory-region = <&ramoops_mem>;
 		pmsg-size = <0x200000>;
+		console-size = <0x40000>;
 		mem-type = <2>;
 	};
 
@@ -3771,7 +3766,9 @@
 		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 		reusable;
 		alignment = <0x0 0x400000>;
-		size = <0x0 0x1400000>;
+		/* ifdef OPLUS_FEATURE_FINGERPRINT */
+		size = <0x0 0x2000000>;
+		/* endif OPLUS_FEATURE_FINGERPRINT */
 	};
 
 	/* merged aop_config, tme_crash_dump, tme_log and uefi_log regions */
@@ -3953,6 +3950,11 @@
 		reg = <0x0 0xb8000000 0x0 0x1c0000>;
 	};
 
+	gunyah_hyp_mem1: gunyah_hyp_region1@bd930000 {
+		no-map;
+		reg = <0x0 0xbd930000 0x0 0x800000>;
+	};
+
 	hwfence_shbuf: hwfence-shmem {
 		no-map;
 		reg = <0x0 0xd4e23000 0x0 0x2dd000>;
@@ -4054,7 +4056,7 @@
 
 	ramoops_mem: ramoops-region {
 		alloc-ranges = <0x1 0x00000000 0xfffffffe 0xffffffff>;
-		size = <0x0 0x200000>;
+		size = <0x0 0x240000>;
 		no-map;
 	};
 
@@ -4089,7 +4091,7 @@
 #include "sun-walt.dtsi"
 
 &qupv3_se7_2uart {
-	status = "ok";
+	status = "disabled";
 };
 
 &qupv3_se3_i2c {

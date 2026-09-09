@@ -141,6 +141,10 @@ properties:
               - qcom,qrd
           - const: qcom,montaguep
 
+      - description: Qualcomm Technologies, Inc. MONTAGUE QMB
+        items:
+          - const: qcom,montague-qmb
+
       - description: Qualcomm Technologies, Inc. TUNA
         items:
           - enum:
@@ -186,8 +190,12 @@ properties:
               - qcom,mtp
               - qcom,kera-qrd
               - qcom,qrd
+              - qcom,kera-idp
+              - qcom,idp
               - qcom,kera-rcm
               - qcom,rcm
+              - qcom,kera-evk
+              - qcom,evk
           - const: qcom,kera
 
       - description: Qualcomm Technologies, Inc. KERAP
@@ -201,9 +209,21 @@ properties:
               - qcom,mtp
               - qcom,kerap-qrd
               - qcom,qrd
+              - qcom,kerap-idp
+              - qcom,idp
               - qcom,kerap-rcm
               - qcom,rcm
+              - qcom,kerap-evk
+              - qcom,evk
           - const: qcom,kerap
+
+      - description: Qualcomm Technologies, Inc. KERA QMB
+        items:
+          - const: qcom,kera-qmb
+
+      - description: Qualcomm Technologies, Inc. KERAP QNA
+        items:
+          - const: qcom,kerap-qna
 
       - description: Qualcomm Technologies, Inc. MONACO
         items:

@@ -480,6 +480,18 @@
 				hysteresis = <0>;
 				type = "passive";
 			};
+
+			socd_trip: socd-trip {
+//#ifdef OPLUS_FEATURE_THERMAL
+                                temperature = <100>;
+//#else
+/*
+                                temperature = <90>;
+*/
+//#endif /* OPLUS_FEATURE_THERMAL */
+				hysteresis = <0>;
+				type = "passive";
+			};
 		};
 	};
 };
