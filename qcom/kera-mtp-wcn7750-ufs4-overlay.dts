@@ -13,7 +13,6 @@
 	model = "Qualcomm Technologies, Inc. Kera MTP + WCN7750 + UFS4";
 	compatible = "qcom,kera-mtp", "qcom,kera", "qcom,kerap-mtp", "qcom,kerap",
 			"qcom,mtp", "qcom,kera-qmb", "qcom,kerap-qna";
-	qcom,msm-id = <686 0x10000>, <659 0x10000>, <731 0x10000>, <732 0x10000>, <720 0x10000>, <721 0x10000>;
+	qcom,msm-id = <686 0x10000>, <659 0x10000>, <720 0x10000>, <721 0x10000>;
 	qcom,board-id = <0x10008 1>;
 };
-

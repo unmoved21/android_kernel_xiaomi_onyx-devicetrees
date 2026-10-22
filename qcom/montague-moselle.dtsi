@@ -4,3 +4,11 @@
  */
 
 #include "montague-hsp.dtsi"
+
+&pcie0 {
+	status = "disabled";
+};
+
+&pcie0_msi {
+	status = "disabled";
+};

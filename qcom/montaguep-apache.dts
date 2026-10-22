@@ -6,10 +6,10 @@
 /dts-v1/;
 
 #include "montaguep.dtsi"
-#include "montague-talyn.dtsi"
+#include "montaguep-apache.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. Montague Apache IDP";
-	compatible = "qcom,montague-idp", "qcom,montague", "qcom,idp";
+	model = "Qualcomm Technologies, Inc. Montaguep Apache IDP";
+	compatible = "qcom,montaguep-idp", "qcom,montaguep", "qcom,idp";
 	qcom,board-id = <0x10022 0x8>;
 };

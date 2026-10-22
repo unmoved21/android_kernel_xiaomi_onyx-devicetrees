@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2023-2025 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 
 #include <dt-bindings/clock/qcom,gcc-sun.h>
@@ -257,10 +257,10 @@
 		};
 	};
 
-	pcie0_msi: qcom,pcie0_msi@16110040 {
+	pcie0_msi: qcom,pcie0_msi@16010040 {
 		compatible = "qcom,pci-msi";
 		msi-controller;
-		reg = <0x17110040 0x0>;
+		reg = <0x16010040 0x0>;
 		interrupt-parent = <&intc>;
 		interrupts = <GIC_SPI 768 IRQ_TYPE_EDGE_RISING>,
 			<GIC_SPI 769 IRQ_TYPE_EDGE_RISING>,
@@ -294,6 +294,23 @@
 			<GIC_SPI 797 IRQ_TYPE_EDGE_RISING>,
 			<GIC_SPI 798 IRQ_TYPE_EDGE_RISING>,
 			<GIC_SPI 799 IRQ_TYPE_EDGE_RISING>;
+		status = "disabled";
+	};
+
+	pcie0_snps_msi: qcom,pcie0_snps_msi@0xa0000000 {
+		compatible = "qcom,pci-msi";
+		msi-controller;
+		reg = <0xa0000000 0x0>;
+		interrupt-parent = <&intc>;
+		interrupts = <GIC_SPI 141 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 142 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 143 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 144 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 145 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 146 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 147 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 148 IRQ_TYPE_LEVEL_HIGH>;
+		qcom,snps;
 		status = "disabled";
 	};
 };

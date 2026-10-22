@@ -10,11 +10,11 @@
 };
 
 &pcie0 {
-	status = "ok";
+	status = "disabled";
 };
 
 &pcie0_msi {
-	status = "ok";
+	status = "disabled";
 };
 
 &wil6210 {
@@ -26,5 +26,5 @@
 };
 
 &wpss_pas {
-	status = "disabled";
+	status = "ok";
 };

@@ -5,6 +5,7 @@
 
 /dts-v1/;
 #include "kera.dtsi"
+#include "kera-iot-reserved-memory.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. Kera IoT SoC";

@@ -1,0 +1,13 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+&reserved_memory {
+	/delete-node/ video_region@9c300000;
+
+	video_mem: video_region@a2880000 {
+		no-map;
+		reg = <0x0 0xa2880000 0x0 0x1000000>;
+	};
+};

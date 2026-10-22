@@ -35,6 +35,10 @@ _platform_map = {
             {"name": "sun-tp.dtb"},
             {"name": "sun-tp-v2.dtb"},
             {
+                "name": "sunp-iot.dtb",
+                "apq": True,
+            },
+            {
                 "name": "sunp-tp.dtb",
                 "apq": True,
             },
@@ -69,6 +73,8 @@ _platform_map = {
             {"name": "sun-rcm-overlay.dtbo"},
             {"name": "sun-rcm-v8-overlay.dtbo"},
             {"name": "sunp-hdk-overlay.dtbo"},
+            {"name": "sunp-iot-vc-overlay.dtbo"},
+            {"name": "sunp-evk-overlay.dtbo"},
             {"name": "sun-rumi-overlay.dtbo"},
         ],
         "binary_compatible_with": ["tuna", "kera"],
@@ -89,6 +95,10 @@ _platform_map = {
             {"name": "sun-tp.dtb"},
             {"name": "sun-tp-v2.dtb"},
             {
+                "name": "sunp-iot.dtb",
+                "apq": True,
+            },
+            {
                 "name": "sunp-tp.dtb",
                 "apq": True,
             },
@@ -123,6 +133,7 @@ _platform_map = {
             {"name": "sun-rcm-overlay.dtbo"},
             {"name": "sun-rcm-v8-overlay.dtbo"},
             {"name": "sunp-hdk-overlay.dtbo"},
+            {"name": "sunp-evk-overlay.dtbo"},
             {"name": "sun-rumi-overlay.dtbo"},
         ],
     },
@@ -585,6 +596,8 @@ _platform_map = {
             {"name": "ravelin-qrd-4gb-overlay.dtbo"},
             {"name": "montague-rumi-overlay.dtbo"},
             {"name": "montague-hsp-overlay.dtbo"},
+            {"name": "montague-hsp-fp-overlay.dtbo"},
+            {"name": "montague-hsp-fp2-overlay.dtbo"},
             {"name": "montague-rcm-overlay.dtbo"},
             {"name": "montague-wsa-overlay.dtbo"},
             {"name": "montague-wsd-overlay.dtbo"},
