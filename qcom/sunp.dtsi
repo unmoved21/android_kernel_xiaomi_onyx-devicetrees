@@ -8,5 +8,5 @@
 / {
 	model = "Qualcomm Technologies, Inc. SunP SoC";
 	compatible = "qcom,sunp";
-	qcom,msm-id = <639 0x10000>, <705 0x10000>, <706 0x10000>;
+	qcom,msm-id = <639 0x10000>;
 };

@@ -1,0 +1,267 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "sun-qrd-sku1-v8.dtsi"
+
+&soc {
+	qps615_pon_rstb: qps615_pon_rstb {
+		compatible = "regulator-fixed";
+		regulator-name = "qps615_pon_rstb";
+		gpio = <&tlmm 12 GPIO_ACTIVE_HIGH>;
+		regulator-min-microvolt = <1800000>;
+		regulator-max-microvolt = <1800000>;
+		enable-active-high;
+		regulator-always-on;
+		regulator-enable-ramp-delay = <10000>;
+	};
+};
+
+&sdhc_2 {
+	cd-gpios = <&tlmm 55 GPIO_ACTIVE_HIGH>;
+};
+
+&regulator_ocp_notifier {
+	/delete-property/ periph-ac1-supply;
+	/delete-property/ periph-ac2-supply;
+	/delete-property/ periph-ac3-supply;
+	/delete-property/ periph-ac4-supply;
+	/delete-property/ periph-ac5-supply;
+	/delete-property/ periph-ac6-supply;
+	/delete-property/ periph-ac7-supply;
+};
+
+&qupv3_se4_spi {
+	status = "disabled";
+};
+
+&pmih010x_eusb2_repeater {
+	qcom,param-override-seq =
+		/* <value reg_offset> */
+		/* Adjust HS trasmit amplitude */
+		<0xf 0x51
+		/* Tx pre-emphasis tuning */
+		0x5 0x57>;
+};
+
+&pmih010x_bcl2 {
+	status = "disabled";
+};
+
+&qupv3_hub_i2c0 {
+	status = "okay";
+
+	pcie0_i2c_ctrl: pcie0_i2c_ctrl {
+		compatible = "qcom,pcie-i2c-ntn3";
+		rc-index = <0x0>;
+		reg = <0x77>;
+		gpio-config-reg = <0x801208>;
+		ep-reset-reg = <0x801210>;
+		ep-reset-gpio-mask = <0xc>;
+		version-reg = <0x800000>;
+		dump-regs = <0x801330 0x801350 0x801370>;
+		reg_update = <0x82c030 0x1
+					0x828000 0x3
+					0x82bd00 0x8
+					0x82c030 0x2
+					0x828000 0x3
+					0x82bd00 0x8
+					0x82c030 0x8
+					0x828000 0x1
+					0x82bd00 0x8
+					0x82c01c 0x10
+					0x82c030 0xf
+					0x828000 0xf
+					0x82b268 0x2>;
+		/*FOM for preset calculation*/
+		switch_reg_update = <0x82c02c 0x00000007
+					0x824a10 0x00000001
+					0x82c030 0x00000008
+					0x828000 0x00000001
+					0x82b074 0x00000020
+					0x82b2bc 0x00000001>;
+	};
+};
+
+&pcie0_snps_msi {
+	status = "okay";
+};
+
+&pcie0 {
+	status = "okay";
+
+	dummy-supply = <&qps615_pon_rstb>;
+
+	msi-parent = <&pcie0_snps_msi>;
+	pcie-i2c-phandle = <&qupv3_hub_i2c0>;
+	qcom,boot-option = <0x1>;
+	qcom,no-client-based-bw-voting;
+
+	qcom,no-l1ss-supported;
+	qcom,no-l1-supported;
+	qcom,no-l0s-supported;
+
+	iommu-map = <0x0 &apps_smmu 0x1400 0x1>,
+		<0x100 &apps_smmu 0x1401 0x1>,
+		<0x208 &apps_smmu 0x1404 0x1>,
+		<0x210 &apps_smmu 0x1405 0x1>,
+		<0x218 &apps_smmu 0x1406 0x1>,
+		<0x300 &apps_smmu 0x1407 0x1>,
+		<0x400 &apps_smmu 0x1408 0x1>,
+		<0x500 &apps_smmu 0x1409 0x1>,
+		<0x501 &apps_smmu 0x1410 0x1>;
+};
+
+&pcie0_rp {
+	/* BDF 1.0.0 */
+	pcie0_bus1_dev0_fn0: pcie0_bus1_dev0_fn0 {
+		reg = <0 0 0 0 0>;
+
+		/* BDF 2.1.0 */
+		pcie0_bus2_dev1_fn0: pcie0_bus2_dev1_fn0 {
+			reg = <0x800 0x0 0x0 0x0 0x0>;
+		};
+
+		/* BDF 2.2.0 */
+		pcie0_bus2_dev2_fn0: pcie0_bus2_dev2_fn0 {
+			reg = <0x1000 0x0 0x0 0x0 0x0>;
+
+			/* BDF 4.0.0 */
+			pcie0_bus4_dev0_fn0: pcie0_bus4_dev0_fn0 {
+				reg = <0x0 0x0 0x0 0x0 0x0>;
+				#address-cells = <1>;
+				#size-cells = <1>;
+			};
+		};
+
+		/* BDF 2.3.0 */
+		pcie0_bus2_dev3_fn0: pcie0_bus2_dev3_fn0 {
+			reg = <0x1800 0x0 0x0 0x0 0x0>;
+
+			/* BDF 5.0.0 - QPS615 Port0 ethernet PF - SGMII, RTL8211 PHY addr 7 */
+			qps615_eth0: qps615_eth0@pcie0_rp {
+				reg = <0x0 0x0 0x0 0x0 0x0>;
+				qcom,phy-port-interface = <4>;
+				qcom,mdc-clk = <4>;
+				qcom,c45-state = <0>;
+				qcom,link-down-macrst = <1>;
+				qcom,phy-rst-gpio = <0>;
+				qcom,phy-rst-delay-us = <20000>;
+				qcom,start-phy-addr = <1>;
+				qcom,always-on-supply;
+				#address-cells = <1>;
+				#size-cells = <1>;
+
+				qcom,iommu-group = <&eth0_pci_iommu_group>;
+				eth0_pci_iommu_group: eth0_pci_iommu_group {
+					qcom,iommu-dma = "atomic";
+				};
+			};
+
+			/* BDF 5.0.1 - QPS615 Port1 ethernet PF - RGMII_ID, RTL8211 PHY addr 1 */
+			qps615_eth1: qps615_eth1@pcie0_rp {
+				reg = <0x100 0x0 0x0 0x0 0x0>;
+				qcom,phy-port-interface = <3>;
+				qcom,mdc-clk = <8>;
+				qcom,c45-state = <0>;
+				qcom,link-down-macrst = <0>;
+				qcom,phy-rst-gpio = <1>;
+				qcom,phy-rst-delay-us = <100000>;
+				qcom,start-phy-addr = <1>;
+				qcom,always-on-supply;
+				#address-cells = <1>;
+				#size-cells = <1>;
+
+				qcom,iommu-group = <&eth1_pci_iommu_group>;
+				eth1_pci_iommu_group: eth1_pci_iommu_group {
+					qcom,iommu-dma = "atomic";
+				};
+			};
+		};
+	};
+};
+
+&tlmm {
+	 lt8711uxe2_dp_lane_sel: lt8711uxe2_dp_lane_sel {
+		 mux {
+			 pins = "gpio50";
+			 function = "gpio";
+		 };
+
+		 config {
+			 pins = "gpio50";
+			 drive-strength = <8>;
+			 bias-disable;
+		 };
+	 };
+
+	 lt8711uxe2_dp_alt_en: lt8711uxe2_dp_alt_en {
+		 mux {
+			 pins = "gpio48";
+			 function = "gpio";
+		 };
+
+		 config {
+			 pins = "gpio48";
+			 drive-strength = <8>;
+			 bias-disable;
+		 };
+	 };
+
+
+	 lt8711uxe2_rst: lt8711uxe2_rst {
+		 mux {
+			 pins = "gpio46";
+			 function = "gpio";
+		 };
+
+		 config {
+			 pins = "gpio46";
+			 drive-strength = <8>;
+			 bias-disable;
+		 };
+	 };
+
+	 lt8711uxe2_int: lt8711uxe2_int {
+		 mux {
+			 pins = "gpio31";
+			 function = "gpio";
+		 };
+
+		 config {
+			 pins = "gpio31";
+			 drive-strength = <8>;
+			 bias-pull-up;
+		 };
+	 };
+};
+
+
+&qupv3_se5_i2c {
+	status = "ok";
+	extcon_lt8711uxe2: lt8711uxe2@3f {
+		compatible = "lt,lt8711uxe2";
+		reg = <0x3f>;
+		interrupt-parent = <&tlmm>;
+		interrupts = <31 IRQ_TYPE_LEVEL_HIGH>;
+		lt,irq-gpio = <&tlmm 31 0>;
+		lt,dp-lane-sel = <&tlmm 50 0>;
+		lt,dp-alt-en = <&tlmm 48 0>;
+		lt,reset-gpio = <&tlmm 46 0>;
+		lt,cc-gpio = <&tlmm 68 0>;
+		control-ramdump;
+		with-hdmi-switch;
+		usb-ss-support;
+		pinctrl-names = "default";
+		pinctrl-0 = <&lt8711uxe2_int &lt8711uxe2_dp_alt_en
+			&lt8711uxe2_dp_lane_sel &lt8711uxe2_rst>;
+		img-fw-rev = <0x000004>;
+		status = "okay";
+	};
+};
+
+&usb0 {
+	extcon = <&extcon_lt8711uxe2>, <&eud>;
+};
+

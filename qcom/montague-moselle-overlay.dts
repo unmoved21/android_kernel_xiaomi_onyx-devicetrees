@@ -16,10 +16,8 @@
 };
 
 &pcie0 {
-
 	qcom,config-recovery;
 	qcom,drv-supported;
-
 };
 
 

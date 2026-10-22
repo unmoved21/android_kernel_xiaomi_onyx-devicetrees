@@ -1,0 +1,110 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/display/bridge/lontium,lt8711uxe2.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Lontium LT8711UXE2 Display Bridge
+
+maintainers:
+  - Yaswanth Kowtha <ykowtha@qti.qualcomm.com>
+
+description:
+  Lontium LT8711UXE2 display bridge used for DisplayPort Alt Mode over HDMI.
+
+properties:
+  compatible:
+    const: lt,lt8711uxe2
+
+  reg:
+    maxItems: 1
+
+  interrupts:
+    maxItems: 1
+
+  pinctrl-0: true
+
+  pinctrl-names: true
+
+  lt,irq-gpio:
+    description: IRQ GPIO mapping
+    maxItems: 1
+
+  lt,dp-lane-sel:
+    description: DP lane select GPIO mapping
+    maxItems: 1
+
+  lt,dp-alt-en:
+    description: DP alt mode enable GPIO mapping
+    maxItems: 1
+
+  lt,reset-gpio:
+    description: Reset GPIO mapping
+    maxItems: 1
+
+  lt,cc-gpio:
+    description: CC GPIO mapping
+    maxItems: 1
+
+  control-ramdump:
+    type: boolean
+    description: Enable control RAM dump
+
+  with-hdmi-switch:
+    type: boolean
+    description: Indicates presence of HDMI switch
+
+  usb-ss-support:
+    type: boolean
+    description: SuperSpeed USB support
+
+  img-fw-rev:
+    $ref: /schemas/types.yaml#/definitions/uint32
+    description: Image firmware revision
+
+  vdd-supply: true
+  vddio-supply: true
+
+required:
+  - compatible
+  - reg
+  - interrupts
+  - lt,irq-gpio
+  - lt,dp-lane-sel
+  - lt,dp-alt-en
+  - lt,reset-gpio
+
+additionalProperties: false
+
+examples:
+  - |
+    #include <dt-bindings/interrupt-controller/irq.h>
+
+    i2c {
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        bridge@3f {
+            compatible = "lt,lt8711uxe2";
+            reg = <0x3f>;
+            interrupt-parent = <&tlmm>;
+            interrupts = <31 IRQ_TYPE_LEVEL_HIGH>;
+
+            lt,irq-gpio = <&tlmm 31 0>;
+            lt,dp-lane-sel = <&tlmm 50 0>;
+            lt,dp-alt-en = <&tlmm 48 0>;
+            lt,reset-gpio = <&tlmm 46 0>;
+            lt,cc-gpio = <&tlmm 68 0>;
+
+            control-ramdump;
+            with-hdmi-switch;
+            usb-ss-support;
+
+            pinctrl-names = "default";
+            pinctrl-0 = <&lt8711uxe2_int &lt8711uxe2_dp_alt_en
+                         &lt8711uxe2_dp_lane_sel &lt8711uxe2_rst>;
+
+            img-fw-rev = <0x000004>;
+        };
+    };
+...

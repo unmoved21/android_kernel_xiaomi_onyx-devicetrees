@@ -6,6 +6,7 @@
 /dts-v1/;
 
 #include "kerap.dtsi"
+#include "kera-iot-reserved-memory.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. KeraP IoT SoC";

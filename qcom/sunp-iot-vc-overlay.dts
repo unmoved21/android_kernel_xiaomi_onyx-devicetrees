@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "sunp-iot-vc.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. SunP IoT VC";
+	compatible = "qcom,sunp-hdk", "qcom,sunp", "qcom,hdk";
+	qcom,msm-id = <705 0x10000>, <705 0x20000>, <0x10002c1 0x10000>, <0x10002c1 0x20000>;
+	qcom,board-id = <0x1001f 0x01>;
+};

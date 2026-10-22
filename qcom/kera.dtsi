@@ -2424,15 +2424,15 @@
 	};
 
 	mmio_sram: mmio-sram@17D09400 {
-		#address-cells = <2>;
-		#size-cells = <2>;
+		#address-cells = <1>;
+		#size-cells = <1>;
 		compatible = "mmio-sram";
-		reg = <0x0 0x17D09400 0x0 0x400>;
-		ranges = <0x0 0x0 0x0 0x17D09400 0x0 0x400>;
+		reg = <0x17D09400 0x400>;
+		ranges = <0x0 0x17D09400 0x400>;
 
 		cpu_scp_lpri: scmi-shmem@0 {
 			compatible = "arm,scmi-shmem";
-			reg = <0x0 0x17D09400 0x0 0x400>;
+			reg = <0x0 0x400>;
 		};
 	};
 
@@ -3118,7 +3118,7 @@
 
 	llcc_freq_table: llcc-freq-table {
 		qcom,freq-tbl =
-			<   19200 >,
+			<  192000 >,
 			<  350000 >,
 			<  533000 >,
 			<  695000 >,

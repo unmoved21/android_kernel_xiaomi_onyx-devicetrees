@@ -15,10 +15,3 @@
 	qcom,softsku-id = <1>;
 };
 
-&pcie0 {
-	status = "okay";
-};
-
-&pcie0_msi {
-	status = "okay";
-};

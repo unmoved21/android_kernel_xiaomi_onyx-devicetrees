@@ -3133,21 +3133,21 @@
 		peer-name = <2>;
 	};
 
-	mmio_sram: mmio-sram@0x17b4e000 {
-		#address-cells = <2>;
-		#size-cells = <2>;
+	mmio_sram: mmio-sram@17b4e000 {
+		#address-cells = <1>;
+		#size-cells = <1>;
 		compatible = "mmio-sram";
-		reg = <0x0 0x17b4e000 0x0 0x400>;
-		ranges = <0x0 0x0 0x0 0x17b4e000 0x0 0x400>;
+		reg = <0x17b4e000 0x400>;
+		ranges = <0x0 0x17b4e000 0x400>;
 
 		cpu_scp_lpri: scmi-shmem@0 {
 			compatible = "arm,scmi-shmem";
-			reg = <0x0 0x17b4e000 0x0 0x200>;
+			reg = <0x0 0x200>;
 		};
 
-		cpucp_rx: scmi-shmem@1 {
+		cpucp_rx: scmi-shmem@200 {
 			compatible = "arm,scmi-shmem";
-			reg = <0x0 0x17b4e200 0x0 0x200>;
+			reg = <0x200 0x200>;
 		};
 	};
 
