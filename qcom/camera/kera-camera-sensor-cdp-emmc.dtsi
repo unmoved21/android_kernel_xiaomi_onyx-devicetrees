@@ -1,0 +1,49 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+&cam_cci0
+{
+	qcom,eeprom2 {
+		gpios = <&tlmm 66 0>,
+			<&tlmm 9 0>;
+	};
+
+	qcom,eeprom1 {
+		gpios = <&tlmm 65 0>,
+			<&tlmm 8 0>;
+	};
+
+	qcom,cam-sensor1 {
+		gpios = <&tlmm 65 0>,
+			<&tlmm 8 0>;
+	};
+
+	qcom,cam-sensor2 {
+		gpios = <&tlmm 66 0>,
+			<&tlmm 9 0>;
+	};
+};
+
+&cam_cci1 {
+	qcom,eeprom3 {
+		gpios = <&tlmm 67 0>,
+			<&tlmm 11 0>;
+	};
+
+	qcom,eeprom4 {
+		gpios = <&tlmm 68 0>,
+			<&tlmm 100 0>;
+	};
+
+	qcom,cam-sensor4 {
+		gpios = <&tlmm 68 0>,
+			<&tlmm 100 0>;
+	};
+
+	qcom,cam-sensor3 {
+		gpios = <&tlmm 67 0>,
+			<&tlmm 11 0>;
+	};
+};
