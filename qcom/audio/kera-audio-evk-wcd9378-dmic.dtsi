@@ -1,0 +1,54 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "kera-iot-audio-cdp.dtsi"
+
+&pmxr2230_gpios {
+	eldo8_pin {
+		Dmic_Eldo_En: Dmic_Eldo_En {
+			pins = "gpio8";
+			function = "normal";
+			input-enable;
+			bias-pull-up;
+			power-source = <1>;
+		};
+	};
+};
+
+&lpass_bt_swr {
+	status = "disabled";
+};
+
+&kera_snd {
+	qcom,wcn-bt = <0x1>;
+	qcom,ext-disp-audio-rx = <1>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&Dmic_Eldo_En>;
+	qcom,msm-mbhc-hphl-swh = <0>;
+	qcom,msm-mbhc-gnd-swh = <0>;
+};
+
+&spkr_2_sd_n_sleep {
+	mux {
+		pins = "gpio79";
+	};
+
+	config {
+		pins = "gpio79";
+	};
+};
+
+&spkr_2_sd_n_active {
+	mux {
+		pins = "gpio79";
+	};
+
+	config {
+		pins = "gpio79";
+	};
+};

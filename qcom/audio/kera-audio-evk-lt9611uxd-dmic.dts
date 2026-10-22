@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "kera-audio-evk-lt9611uxd-dmic.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Kera EVK LT9611UXD + DMIC";
+	compatible = "qcom,kera-evk", "qcom,kera", "qcom,kerap-evk", "qcom,kerap",
+			"qcom,evk";
+	qcom,msm-id = <731 0x10000>, <732 0x10000>;
+	qcom,board-id = <0x6002F 0>;
+};

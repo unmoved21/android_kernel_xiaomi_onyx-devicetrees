@@ -1,0 +1,106 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "kera-audio-evk-wcd9378-dmic.dtsi"
+
+&wcd_reset_active {
+	mux {
+		pins = "gpio57";
+	};
+
+	config {
+		pins = "gpio57";
+	};
+};
+
+&wcd_reset_sleep {
+	mux {
+		pins = "gpio57";
+	};
+
+	config {
+		pins = "gpio57";
+	};
+};
+
+&wcd9378_codec {
+	status = "disabled";
+};
+
+&wcd9378_rx_slave {
+	status = "disabled";
+};
+
+&wcd9378_tx_slave {
+	status = "disabled";
+};
+
+&cdc_dmic45_gpios {
+	status = "okay";
+};
+
+&cdc_quat_mi2s_gpios {
+	status = "okay";
+};
+
+&cdc_quin_mi2s_gpios {
+	status = "disabled";
+};
+
+&va_macro {
+	/delete-property/ qcom,va-swr-gpios;
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&rx_macro {
+	/delete-property/ qcom,rx-swr-gpios;
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&kera_snd {
+	qcom,wcd-disabled = <1>;
+	/delete-property/ qcom,quin-mi2s-gpios;
+	qcom,cdc-dmic45-gpios = <&cdc_dmic45_gpios>;
+
+	qcom,audio-routing =
+		"TX DMIC0", "Digital Mic0",
+		"TX DMIC1", "Digital Mic1",
+		"TX DMIC2", "Digital Mic2",
+		"TX DMIC3", "Digital Mic3",
+		"TX DMIC4", "Digital Mic4",
+		"TX DMIC5", "Digital Mic5",
+		"TX DMIC6", "Digital Mic6",
+		"TX DMIC7", "Digital Mic7",
+		"WSA SRC0_INP", "SRC0",
+		"WSA_TX DEC0_INP", "TX DEC0 MUX",
+		"WSA_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC0_INP", "TX DEC0 MUX",
+		"RX_TX DEC1_INP", "TX DEC1 MUX",
+		"RX_TX DEC2_INP", "TX DEC2 MUX",
+		"RX_TX DEC3_INP", "TX DEC3 MUX",
+		"SpkrLeft IN", "WSA_SPK1 OUT",
+		"SpkrRight IN", "WSA_SPK2 OUT",
+		"VA SWR_INPUT", "VA_SWR_CLK",
+		"VA_AIF1 CAP", "VA_SWR_CLK",
+		"VA_AIF2 CAP", "VA_SWR_CLK",
+		"VA_AIF3 CAP", "VA_SWR_CLK",
+		"VA DMIC0", "Digital Mic0",
+		"VA DMIC1", "Digital Mic1",
+		"VA DMIC2", "Digital Mic2",
+		"VA DMIC3", "Digital Mic3",
+		"VA DMIC4", "Digital Mic4",
+		"VA DMIC5", "Digital Mic5",
+		"VA DMIC6", "Digital Mic6",
+		"VA DMIC7", "Digital Mic7";
+
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>,
+		<&wsa884x_0220>, <&wsa884x_0221>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc",
+		"wsa-codec1", "wsa-codec2";
+
+};

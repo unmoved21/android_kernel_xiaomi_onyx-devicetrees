@@ -1,0 +1,97 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "sun-audio-overlay.dtsi"
+
+&lpass_cdc {
+	qcom,num-macros = <3>;
+};
+
+&wcd939x_codec {
+	status = "disabled";
+};
+
+&wcd_usbss {
+	status = "disabled";
+};
+
+&qupv3_se3_i2c {
+	status = "disabled";
+};
+
+&wsa_spkr_en02 {
+	status = "disabled";
+};
+
+&wsa_spkr_en13 {
+	status = "disabled";
+};
+
+&va_macro {
+	status = "okay";
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&rx_macro {
+	status = "okay";
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&tx_macro {
+	status = "okay";
+	qcom,is-used-swr-gpio = <0>;
+};
+
+&wsa_macro {
+	status = "disabled";
+};
+
+&wsa2_macro {
+	status = "disabled";
+};
+
+&va_swr_gpios {
+	status = "disabled";
+};
+
+&swr1 {
+	status = "disabled";
+};
+
+&swr2 {
+	status = "disabled";
+};
+
+&rx_swr_gpios {
+	status = "disabled";
+};
+
+&swr_haptics {
+	status = "disabled";
+};
+
+&lpass_bt_swr {
+	status = "disabled";
+};
+
+&sun_snd {
+	qcom,model = "sun-iot-vc-snd-card";
+
+	qcom,audio-routing = "Record", "Playback";
+
+	asoc-codec  = <&stub_codec>, <&lpass_cdc>;
+	asoc-codec-names = "msm-stub-codec.1", "lpass-cdc";
+
+	qcom,wcd-disabled = <1>;
+	qcom,wsa-max-devs = <0>;
+	qcom,mi2s-audio-intf = <1>;
+	qcom,tdm-audio-intf = <0>;
+	qcom,ext-disp-audio-rx = <1>;
+	qcom,wcn-bt = <0>;
+	qcom,wcn-bt-ext = <0>;
+	qcom,qmp-mic = <0>;
+	swr-haptics-unsupported;
+
+};
