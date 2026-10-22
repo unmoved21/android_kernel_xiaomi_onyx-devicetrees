@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "sun-vidc.dtsi"
+
+/* sun V3-specific changes */
+&msm_vidc {
+        compatible = "qcom,sm8750-vidc-v3";
+};

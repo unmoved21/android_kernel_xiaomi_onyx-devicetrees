@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "kera-vidc.dtsi"
+
+/* Kera V2-specific changes */
+&msm_vidc {
+	compatible = "qcom,kera-vidc-v2";
+};
