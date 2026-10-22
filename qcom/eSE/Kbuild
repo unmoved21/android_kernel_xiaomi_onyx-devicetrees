@@ -50,6 +50,7 @@ dtbo-y += kera-ese-rcm-wcn7750-ufs2.dtbo
 dtbo-y += kera-ese-rcm-wcn7750-ufs3.dtbo
 dtbo-y += kera-ese-rcm-wcn7750-ufs4.dtbo
 dtbo-y += kera-ese-rcm.dtbo
+dtbo-y += kera-evk-emmc.dtbo
 endif
 
 always-y	:= $(dtb-y) $(dtbo-y)
