@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 
 #define MHZ_TO_KBPS(mhz, w) ((mhz * 1000000 * w) / (1024))
@@ -28,9 +28,11 @@
 
 	clocks = <&gcc GCC_GPU_GEMNOC_GFX_CLK>,
 		<&gpucc GPU_CC_AHB_CLK>,
+		<&gpucc GPU_CC_MEMNOC_GFX_CLK>,
 		<&aoss_qmp QDSS_CLK>;
 	clock-names = "gcc_gpu_memnoc_gfx",
 			"gpu_cc_ahb",
+			"gpu_cc_memnoc_gfx_clk",
 			"apb_pclk";
 
 	qcom,gpu-model = "Adreno825";
@@ -164,10 +166,11 @@
 			<&gcc GCC_DDRSS_GPU_AXI_CLK>,
 			<&gcc GCC_GPU_GEMNOC_GFX_CLK>,
 			<&gpucc GPU_CC_AHB_CLK>,
-			<&gpucc GPU_CC_HUB_CX_INT_CLK>;
+			<&gpucc GPU_CC_HUB_CX_INT_CLK>,
+			<&gpucc GPU_CC_MEMNOC_GFX_CLK>;
 
 		clock-names = "gmu_clk", "cxo_clk", "axi_clk",
-			"memnoc_clk", "ahb_clk", "hub_clk";
+			"memnoc_clk", "ahb_clk", "hub_clk","gpu_cc_memnoc_gfx_clk";
 
 		qcom,gmu-freq-table = <500000000 RPMH_REGULATOR_LEVEL_LOW_SVS>,
 					<650000000 RPMH_REGULATOR_LEVEL_SVS>;
