@@ -1,0 +1,15 @@
+load("@rules_devicetree//devicetree:devicetree_library.bzl", "devicetree_library")
+load(":define_targets.bzl", "define_all_targets")
+
+devicetree_library(
+    name = "all_wlan_dtsi",
+    hdrs = glob(["**/*.dtsi"]),
+    includes = [
+        ".",
+    ],
+    deps = [
+        "//soc-repo:dt_includes",
+    ],
+)
+
+define_all_targets()

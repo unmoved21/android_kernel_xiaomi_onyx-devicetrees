@@ -11,6 +11,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Pebble MTP + wcn7750 WLAN";
 	compatible = "qcom,pebble-mtp", "qcom,pebblep-mtp", "qcom,mtp", "qcom,pebble", "qcom,pebblep";
-	qcom,msm-id = <735 0x10000>, <741 0x10000>;
+	qcom,msm-id = <735 0x10000>, <735 0x10001>, <741 0x10000>, <741 0x10001>, <793 0x10000>, <794 0x10000>;
 	qcom,board-id = <0x10008 0x0>, <0x10408 0x0>;
 };

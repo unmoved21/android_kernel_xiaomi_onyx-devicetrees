@@ -141,7 +141,6 @@
 		qcom,same-dt-multi-dev;
 		/* For AOP communication, use direct QMP instead of mailbox */
 		qcom,qmp = <&aoss_qmp>;
-		msix-match-addr = <0x3000>;
 		platform-name-required;
 
 		vdd-wlan-aon-supply = <&L2D>;
@@ -188,21 +187,21 @@
 		/** ICC Path 1 (SNOC/ANOC) **/
 		<0 0>, /* no vote */
 		/* idle: 0-18 Mbps snoc/anoc: 120 Mhz */
-		<2250 308000>,
+		<2250 616000>,
 		/* low: 18-60 Mbps snoc/anoc: 120 Mhz */
-		<7500 308000>,
+		<7500 616000>,
 		/* medium: 60-240 Mbps snoc/anoc: 120 Mhz */
-		<30000 308000>,
+		<30000 616000>,
 		/* high: 240-1200 Mbps snoc/anoc: 120 Mhz */
-		<150000 308000>,
+		<150000 616000>,
 		/* very high: > 1200 Mbps snoc/anoc: 403 Mhz */
-		<180000 3210000>,
+		<180000 6420000>,
 		/* ultra high: DBS mode snoc/anoc: 403 Mhz */
-		<325000 3210000>,
+		<325000 6420000>,
 		/* super high: DBS mode snoc/anoc: 533 Mhz */
-		<625000 6450000>,
+		<625000 12900000>,
 		/* low (latency critical): 18-60 Mbps snoc/anoc: 200 Mhz */
-		<7500 1610000>,
+		<7500 3220000>,
 
 		/** ICC Path 2 **/
 		<0 0>,
@@ -242,6 +241,7 @@
 			 " {class: wlan_pdc, ss: rf, res: S4C0.v, dwnval: 1876}",
 			 " {class: wlan_pdc, ss: rf, res: S9D0.m, enable: 0}",
 			 " {class: wlan_pdc, ss: rf, res: S9D0.v, enable: 0}",
+			 " {class: wlan_pdc, ss: rf, res: S3C0.m, enable: 0}",
 			 " {class: wlan_pdc, ss: rf, res: S3C0.e, enable: 0}",
 			 " {class: wlan_pdc, ss: rf, res: S1J1.m, enable: 1}",
 			 " {class: wlan_pdc, ss: rf, res: S1J1.v, enable: 1}",
@@ -275,6 +275,11 @@
 			iommu-addresses = <&wlan_direct_link 0x0 0x0 0x0 0x88000000>,
 				<&wlan_direct_link 0x0 0xb0000000 0x0 0x50000000>;
 		};
+	};
+
+	wlan_vendor_wonder: qcom,cnss-vendor-wlan-wonder {
+		compatible = "qcom,cnss-vendor-wlan-wonder";
+		status = "okay";
 	};
 };
 

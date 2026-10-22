@@ -107,7 +107,6 @@
 		qcom,same-dt-multi-dev;
 		/* For AOP communication, use direct QMP instead of mailbox */
 		qcom,qmp = <&aoss_qmp>;
-		msix-match-addr = <0x3000>;
 
 		vdd-wlan-io-supply = <&L3F>;
 		qcom,vdd-wlan-io-config = <1800000 1800000 30000 0 1>;
@@ -245,12 +244,18 @@
 		qcom,iommu-group = <&cnss_audio_iommu_group0>;
 		qrtr_instance_id = <0x30>;
 		no-l1-supported;
-		memory-region = <&cnss_wlan_mem &cnss_pci0_iommu_region_partition>;
+		memory-region = <&cnss_wlan_mem
+				 &cnss_pci0_iommu_region_partition
+				 &cnss_pci0_target_local_hole>;
 
 		cnss_pci0_iommu_region_partition: cnss_pci0_iommu_region_partition {
 			/* address-cells =3 size-cells=2 from sun-pcie.dtsi */
 			iommu-addresses = <&cnss_pci0 0x0 0x0 0x0 0x0 0x18000000>,
 					  <&cnss_pci0 0x0 0x0 0xB0000000 0x0 0x50000000>;
+		};
+
+		cnss_pci0_target_local_hole: cnss_pci0_target_local_hole {
+			iommu-addresses = <&cnss_pci0 0x0 0x0 0x3f010000 0x0 0x8000>;
 		};
 	};
 };

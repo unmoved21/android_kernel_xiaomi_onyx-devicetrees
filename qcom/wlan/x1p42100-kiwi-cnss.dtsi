@@ -69,7 +69,7 @@
 		qcom,same-dt-multi-dev;
 		platform-name-required;
 
-		vdd-wlan-m2-supply = <&vreg_wlan_3p3>;
+		vdd-wlan-m2-supply = <&vreg_wlan_kiwi_3p3>;
 		qcom,vdd-wlan-m2-config = <3300000 3300000 0 0 0>;
 		vdd-wlan-io-supply = <&L15B>;
 		qcom,vdd-wlan-io-config = <1800000 1800000 0 0 0>;

@@ -96,8 +96,8 @@
 		qcom,same-dt-multi-dev;
 		/* For AOP communication, use direct QMP instead of mailbox */
 		//qcom,qmp = <&aoss_qmp>;
-		msix-match-addr = <0x3000>;
 		platform-name-required;
+		caldb-rddm-reuse-supported;
 		fig-direct-cx;
 		cx-reg-name = "S3C0";
 
@@ -128,12 +128,20 @@
 		wcal-pbs-supply = <&WCAL_PBS>;*/
 	};
 
+	cnss_iommu_art_heap_fig: cnss_iommu_art_heap_fig {
+		qcom,iommu-msi-size = <0x1000>;
+		qcom,iommu-geometry = <0x0 0x88000000 0x0 0x28010000>;
+		qcom,iommu-dma = "fastmap";
+		qcom,iommu-pagetable = "coherent";
+		qcom,iommu-faults = "stall-disable", "HUPCF", "non-fatal";
+	};
+
 	wlan_direct_link: qcom,cnss-direct-link {
 		compatible = "qcom,cnss-direct-link";
 		#address-cells = <2>;
 		#size-cells = <2>;
 		iommus = <&apps_smmu 0xc0f 0x0>;
-		qcom,iommu-group = <&cnss_audio_iommu_group0>;
+		qcom,iommu-group = <&cnss_iommu_art_heap_fig>;
 		memory-region = <&direct_link_iommu_region_partition>;
 		dma-coherent;
 
@@ -150,7 +158,7 @@
 
 	cnss_pci0: cnss_pci0 {
 		reg = <0 0 0 0 0>;
-		qcom,iommu-group = <&cnss_audio_iommu_group0>;
+		qcom,iommu-group = <&cnss_iommu_art_heap_fig>;
 		memory-region = <&cnss_wlan_mem &cnss_pci0_iommu_region_partition>;
 		cnss_pci0_iommu_region_partition: cnss_pci0_iommu_region_partition {
 			/* address-cells =3 size-cells=2 from art-pcie.dtsi */

@@ -1,0 +1,108 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+
+&pmh0104_gpios {
+	cnss_wlan_en_active: cnss_wlan_en_active {
+		pins = "gpio8";
+		function = "normal";
+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_HIGH>;
+		input-disable;
+		output-high;
+		power-source = <1>; /* 1.2 V */
+	};
+
+	cnss_wlan_en_sleep: cnss_wlan_en_sleep {
+		pins = "gpio8";
+		function = "normal";
+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_LOW>;
+		input-disable;
+		output-low;
+	};
+};
+
+&tlmm {
+	cnss_pins {
+		cnss_wlan_sw_ctrl_wl_cx: cnss_wlan_sw_ctrl_wl_cx {
+			mux {
+				pins = "gpio19";
+				function = "wcn_sw";
+			};
+		};
+
+		cnss_host_sol_default: cnss_host_sol_default {
+			mux {
+				pins = "gpio204";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio204";
+				drive-strength = <4>;
+				bias-pull-down;
+			};
+		};
+
+		cnss_sw_ctrl_data_0: cnss_sw_ctrl_data_0 {
+			mux {
+				pins = "gpio155";
+				function = "gpio";
+			};
+		};
+
+		cnss_sw_ctrl_data_1: cnss_sw_ctrl_data_1 {
+			mux {
+				pins = "gpio156";
+				function = "gpio";
+			};
+		};
+	};
+};
+
+&reserved_memory {
+	cnss_wlan_mem: cnss_wlan_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x2000000>;
+	};
+};
+
+&soc {
+	wlan_fig: qcom,cnss-fig@b0000000 {
+		compatible = "qcom,cnss-fig";
+		reg = <0x0 0xb0000000 0x0 0x10000>;
+		reg-names = "smmu_iova_ipa";
+
+		supported-ids = <0x1111>;
+		qcom,wlan-ramdump-dynamic = <0x600000>;
+		cnss-enable-self-recovery;
+		qcom,wlan-cbc-enabled;
+		use-pm-domain;
+		qcom,same-dt-multi-dev;
+		qcom,qmp = <&aoss_qmp>;
+		platform-name-required;
+		caldb-rddm-reuse-supported;
+		fig-direct-cx;
+		qcom,wlan;
+		wlan-txrx-intr-cpumask = <0x3 0x30>;
+
+		qcom,wlan-sw-ctrl-gpio = <&tlmm 19 0>;
+		wlan-en-gpio = <&pmh0104_gpios 8 0>;
+		qcom,bt-en-gpio = <&pmh0104_gpios 5 0>;
+		qcom,sw-ctrl-data-0-gpio = <&tlmm 155 0>;
+		qcom,sw-ctrl-data-1-gpio = <&tlmm 156 0>;
+		cnss-direct-cx-host-sol-init-gpio = <&tlmm 204 0>;
+		mpm_wake_set_gpios = <19>;
+		pinctrl-names = "wlan_en_active", "wlan_en_sleep",
+				"sw_ctrl_wl_cx", "sol_default";
+		pinctrl-0 = <&cnss_wlan_en_active>;
+		pinctrl-1 = <&cnss_wlan_en_sleep>;
+		pinctrl-2 = <&cnss_wlan_sw_ctrl_wl_cx>;
+		pinctrl-3 = <&cnss_host_sol_default>;
+	};
+};

@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "coast-qca6750.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Coast MTP + LP5 + QCA6750  + UFS3.1 + WCD9378 DMIC";
+	compatible = "qcom,coast-mtp", "qcom,mtp", "qcom,coast";
+	qcom,msm-id = <761 0x10000>;
+	qcom,board-id = <0x10108 0x0>, <0x20108 0x0>;
+};

@@ -132,22 +132,22 @@
 		qcom,bus-bw-cfg =
 		/** ICC Path 1 **/
 		<0 0>, /* no vote */
-		/* idle: 0-18 Mbps snoc/anoc: 100 Mhz */
-		<2250 308000>,
-		/* low: 18-60 Mbps snoc/anoc: 100 Mhz */
-		<7500 308000>,
-		/* medium: 60-240 Mbps snoc/anoc: 100 Mhz */
-		<30000 308000>,
-		/* high: 240-1200 Mbps snoc/anoc: 100 Mhz */
-		<100000 308000>,
+		/* idle: 0-18 Mbps snoc/anoc: 120 Mhz */
+		<2250 616000>,
+		/* low: 18-60 Mbps snoc/anoc: 120 Mhz */
+		<7500 616000>,
+		/* medium: 60-240 Mbps snoc/anoc: 120 Mhz */
+		<30000 616000>,
+		/* high: 240-1200 Mbps snoc/anoc: 120 Mhz */
+		<100000 616000>,
 		/* very high: > 1200 Mbps snoc/anoc: 403 Mhz */
-		<175000 3210000>,
+		<175000 6420000>,
 		/* ultra high: DBS mode snoc/anoc: 403 Mhz */
-		<312500 3210000>,
+		<312500 6420000>,
 		/* super high: DBS mode snoc/anoc: 533 Mhz */
-		<587500 6450000>,
+		<587500 12900000>,
 		/* low (latency critical): 18-60 Mbps snoc/anoc: 200 Mhz */
-		<7500 1610000>,
+		<7500 3220000>,
 
 		/** ICC Path 2 **/
 		<0 0>,
@@ -189,12 +189,14 @@
 		qcom,pdc_init_table =
 			" {class: wlan_pdc, ss: rf, res: S7G0.v, dwnval: 1240}",
 			" {class: wlan_pdc, ss: rf, res: S9D0.v, dwnval: 616}",
+			" {class: wlan_pdc, ss: rf, res: S3C0.m, enable: 0}",
 			" {class: wlan_pdc, ss: rf, res: S3C0.e, enable: 0}",
 			" {class: wlan_pdc, ss: rf, res: L3K1.m, dwnval: 3}",
 			" {class: wlan_pdc, ss: rf, res: S9D0.v, upval: 976}",
 			" {class: wlan_pdc, ss: bb, res: pdc, enable: 1}",
 			" {class: wlan_pdc, ss: bb, res: S3C0.v, dwnval: 420}",
 			" {class: wlan_pdc, ss: bb, res: S3C0.v, upval: 940}",
+			" {class: wlan_pdc, ss: bb, res: S3C0.e, enable: 0}",
 			" {class: wlan_pdc, ss: bb, res: S1J1.m, enable: 1}",
 			" {class: wlan_pdc, ss: bb, res: S1J1.v, enable: 1}";
 
@@ -204,6 +206,10 @@
 		wlan-txrx-intr-cpumask = <0x3 0x30>;
 	};
 
+	wlan_vendor_wonder: qcom,cnss-vendor-wlan-wonder {
+		compatible = "qcom,cnss-vendor-wlan-wonder";
+		status = "okay";
+	};
 };
 
 &pcie0_rp {

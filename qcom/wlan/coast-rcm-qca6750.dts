@@ -1,0 +1,16 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "coast-qca6750.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Coast RCM + LP5 + LP4 + QCA6750 + UFS4.1";
+	compatible = "qcom,coast-rcm", "qcom,rcm", "qcom,coast";
+	qcom,msm-id = <761 0x10000>;
+	qcom,board-id = <0x20015 0x0>, <0x20115 0x0>;
+};

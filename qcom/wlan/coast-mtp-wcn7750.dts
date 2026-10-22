@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "coast-wcn7750.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Coast MTP + WCN7750";
+	compatible = "qcom,coast-mtp", "qcom,mtp", "qcom,coast";
+	qcom,msm-id = <761 0x10000>;
+	qcom,board-id = <0x10008 0x0>, <0x20008 0x0>,
+			<0x30008 0x0>, <0x30108 0x0>;
+};

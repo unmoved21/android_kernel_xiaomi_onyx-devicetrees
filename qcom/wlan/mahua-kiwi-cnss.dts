@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "mahua-kiwi-cnss.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Mahua CRD";
+	compatible = "qcom,mahua-crd", "qcom,mahua", "qcom,crd";
+	qcom,msm-id = <693 0x10000>;
+	qcom,board-id = <40 0>, <34 0>, <43 0>, <21 0>;
+};

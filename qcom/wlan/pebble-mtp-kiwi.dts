@@ -11,6 +11,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Pebble MTP + Kiwi WLAN";
 	compatible = "qcom,pebble", "qcom,pebblep", "qcom,pebble-mtp", "qcom,pebblep-mtp", "qcom,mtp";
-	qcom,msm-id = <735 0x10000>, <741 0x10000>;
+	qcom,msm-id = <735 0x10000>, <735 0x10001>, <741 0x10000>, <741 0x10001>;
 	qcom,board-id = <0x10208 0x0>, <0x60008 0x0>, <0x20308 0x0>; /*MTP*/
 };

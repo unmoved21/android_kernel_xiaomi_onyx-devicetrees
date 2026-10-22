@@ -214,6 +214,10 @@ properties:
    wlan-txrx-intr-cpumask:
      description: cpumask for wlan tx rx interrupt affinity
 
+   qcom,napi-ipi-redirect-enable:
+     description: boolean property to enable IPI-based NAPI poll redirect
+       for TX/RX completion groups.
+
    qcom,tcs_offset_int_pow_amp_vreg:
      description: |
        TCS CMD register offset for Voltage
@@ -323,6 +327,14 @@ properties:
      description: |
        PBS regulator on which clients can vote to trigger the PBS
        sequence.
+
+   caldb-rddm-reuse-supported:
+     description: |
+       Boolean property to declare that the host platform supports
+       the CALDB and RDDM reuse feature. When present, the CNSS
+       driver support to save the CALDB into the
+       RDDM memory segments upon firmware crash, and restore it
+       after recovery, avoiding the need for full re-calibration.
 
 required:
   - compatible

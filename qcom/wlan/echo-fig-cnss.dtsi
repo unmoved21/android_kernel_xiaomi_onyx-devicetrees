@@ -99,6 +99,7 @@
 		qcom,wlan-ramdump-dynamic = <0x780000>;
 		use-pm-domain;
 		platform-name-required;
+		caldb-rddm-reuse-supported;
 		qcom,same-dt-multi-dev;
 
 		cx-mode = <0>;

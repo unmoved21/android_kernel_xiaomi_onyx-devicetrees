@@ -87,6 +87,7 @@
 		/* List of GPIOs to be setup for interrupt wakeup capable */
 		mpm_wake_set_gpios = <18>;
 		pin_wlan-en-gpio = <&pmh0104_c_gpios 7 0>;
+		pin_bt-en-gpio = <&pmh0104_c_gpios 6 0>;
 		pin_sw-ctrl-gpio = <&tlmm 18 0>;
 		pinctrl-names = "sw_ctrl", "wlan_en_active", "wlan_en_sleep";
 		pinctrl-0 = <&icnss_sw_ctrl>;
@@ -218,6 +219,10 @@
 			#cooling-cells = <2>;
 		};
 
+		icnss_cdev_bw: icnss_cdev3 {
+			#cooling-cells = <2>;
+		};
+
 		qcom,smp2p_map_wlan_1_in {
 			interrupts-extended = <&pebble_wcn7750_smp2p_wlan_1_in 0 0>,
 					      <&pebble_wcn7750_smp2p_wlan_1_in 1 0>;
@@ -248,5 +253,10 @@
 			iommu-addresses = <&wlan_direct_link 0x0 0x0 0x0 0xa0000000>,
 				<&wlan_direct_link 0x0 0xb0000000 0x0 0x50000000>;
 		};
+	};
+
+	wlan_vendor_wonder: qcom,cnss-vendor-wlan-wonder {
+		compatible = "qcom,icnss-vendor-wlan-wonder";
+		status = "okay";
 	};
 };

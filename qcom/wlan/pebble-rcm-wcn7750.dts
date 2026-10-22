@@ -11,6 +11,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Pebble RCM + wcn7750 WLAN";
 	compatible = "qcom,pebble-rcm", "qcom,pebblep-rcm", "qcom,rcm", "qcom,pebble", "qcom,pebblep";
-	qcom,msm-id = <735 0x10000>, <741 0x10000>;
+	qcom,msm-id = <735 0x10000>, <735 0x10001>, <741 0x10000>, <741 0x10001>;
 	qcom,board-id = <0x10115 0x0>, <0x20115 0x0>;
 };

@@ -11,8 +11,8 @@
 
 / {
 	model = "Qualcomm Technologies, Inc. Seraph SoC";
-	compatible = "qcom,seraph", "qcom,seraphp-atp", "qcom,seraphp", "qcom,atp", "qcom,seraphp-idp", "qcom,idp";
-	qcom,msm-id = <673 0x10000>;
-	qcom,board-id = <0x10021 0>, <0x10022 0>, <0x10022 1>, <0x10022 2>, <0x10022 3>;
+	compatible = "qcom,seraph", "qcom,seraphp-atp", "qcom,seraphp", "qcom,atp", "qcom,seraphp-idp", "qcom,idp", "qcom,qar", "qcom,seraphp-qar", "qcom,seraphp-v1.1-idp";
+	qcom,msm-id = <673 0x10000>, <673 0x10001>;
+	qcom,board-id = <0x10021 0>, <0x10022 0>, <0x10022 1>, <0x10022 2>, <0x10022 3>, <0x1002C 0>, <0x1002C 1>;
 };
 

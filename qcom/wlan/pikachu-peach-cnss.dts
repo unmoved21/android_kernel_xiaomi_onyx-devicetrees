@@ -11,7 +11,7 @@
 
 / {
 	model = "Qualcomm Technologies, Inc. Pikachu SoC";
-	compatible = "qcom,pikachu-atp", "qcom,pikachu-idp", "qcom,pikachu", "qcom,atp", "qcom,idp", "qcom,pikachup", "qcom,pikachup-atp", "qcom,pikachup-idp";
-	qcom,msm-id = <736 0x10000>, <737 0x10000>;
+	compatible = "qcom,pikachu-atp", "qcom,pikachu-idp", "qcom,pikachu", "qcom,atp", "qcom,idp", "qcom,pikachup", "qcom,pikachup-atp", "qcom,pikachup-idp", "qcom,pikachups-atp", "qcom,pikachups", "qcom,pikachups-idp", "qcom,pikachus-atp", "qcom,pikachus", "qcom,pikachus-idp";
+	qcom,msm-id = <736 0x10000>, <737 0x10000>, <783 0x10000>, <784 0x10000>;
 	qcom,board-id = <0x10021 0>, <0x10022 0>, <0x10022 1>;
 };

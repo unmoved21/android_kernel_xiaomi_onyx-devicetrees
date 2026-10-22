@@ -37,6 +37,7 @@
 		qcom,iommu-faults = "stall-disable", "HUPCF", "non-fatal";
 		qcom,wlan-msa-fixed-region = <&wlan_mem>;
 		qcom,wlan;
+		bdf-download-support;
 		memory-region = <&icnss2_iommu_region_partition>;
 		qcom,iommu-geometry = <0xa0000000 0x10010000>;
 		vdd-cx-mx-supply = <&L7A>;
@@ -60,7 +61,7 @@
 		 * 0x0 0x50000000 = 100000000 - 0xB0000000
 		 */
 		icnss2_iommu_region_partition: icnss2_iommu_region_partition {
-			iommu-addresses = <&icnss 0x00000000 0x0 0xa0000000>,
+			iommu-addresses = <&icnss 0x00000000 0xa0000000>,
 					<&icnss 0xB0000000 0x50000000>;
 		};
 	};

@@ -302,6 +302,10 @@
 			#cooling-cells = <2>;
 		};
 
+		icnss_cdev_bw: icnss_cdev3 {
+			#cooling-cells = <2>;
+		};
+
 		qcom,smp2p_map_wlan_1_in {
 			interrupts-extended = <&chora_wcn7750_smp2p_wlan_1_in 0 0>,
 					      <&chora_wcn7750_smp2p_wlan_1_in 1 0>;

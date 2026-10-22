@@ -37,6 +37,8 @@
 		power-domains = <&scmi_power 8>, <&scmi_power 7>;
 		power-domain-names = "wlan_ldo", "wlan_gpio";
 
+		wlan-txrx-intr-cpumask = <0xf0 0xf0>;
+
 		chip_cfg@0 {
 			supported-ids = <0x1101>;
 			qcom,wlan-ramdump-dynamic = <0x400000>;

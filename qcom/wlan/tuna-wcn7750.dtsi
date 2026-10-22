@@ -256,4 +256,9 @@
 					<&wlan_direct_link 0xc0000000 0x40000000>;
 		};
 	};
+
+	wlan_vendor_wonder: qcom,cnss-vendor-wlan-wonder {
+		compatible = "qcom,icnss-vendor-wlan-wonder";
+		status = "okay";
+	};
 };

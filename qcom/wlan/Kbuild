@@ -7,6 +7,7 @@ dtbo-y += art-mtp-peach.dtbo
 dtbo-y += art-omtp-fig.dtbo
 dtbo-y += art-qrd-fig.dtbo
 dtbo-y += art-rcm-fig.dtbo
+dtbo-y += art-hdk-fig.dtbo
 dtbo-y += art-rcm-peach.dtbo
 dtbo-y += art-heap-mtp-fig.dtbo
 dtbo-y += art-heap-cdp-fig.dtbo
@@ -23,6 +24,7 @@ endif
 
 ifeq ($(CONFIG_ARCH_X1P42100),y)
 dtbo-y += x1p42100-kiwi-cnss.dtbo
+dtbo-y += x1p42100-wcn7760-cnss.dtbo
 endif
 
 ifeq ($(CONFIG_ARCH_CANOE),y)
@@ -65,6 +67,28 @@ ifeq ($(CONFIG_ARCH_MALABAR),y)
 dtbo-y += malabar-adrastea.dtbo
 endif
 
+ifeq ($(CONFIG_ARCH_BOURTZI),y)
+dtbo-y += bourtzi-mtp-wcn6450.dtbo
+dtbo-y += bourtzi-qrd-wcn6450.dtbo
+dtbo-y += bourtzi-rcm-wcn6450.dtbo
+dtbo-y += bourtzi-atp-adrastea.dtbo
+dtbo-y += bourtzi-cdp-adrastea.dtbo
+dtbo-y += bourtzi-mtp-adrastea.dtbo
+dtbo-y += bourtzi-qrd-adrastea.dtbo
+dtbo-y += bourtzi-rcm-adrastea.dtbo
+endif
+
+ifeq ($(CONFIG_ARCH_COAST),y)
+dtbo-y += coast-atp-wcn7750.dtbo
+dtbo-y += coast-cdp-wcn7750.dtbo
+dtbo-y += coast-mtp-qca6750.dtbo
+dtbo-y += coast-mtp-wcn7750.dtbo
+dtbo-y += coast-qrd-qca6750.dtbo
+dtbo-y += coast-qrd-wcn7750.dtbo
+dtbo-y += coast-rcm-qca6750.dtbo
+dtbo-y += coast-rcm-wcn7750.dtbo
+endif
+
 ifeq ($(CONFIG_ARCH_SUN),y)
 dtbo-y += sun-kiwi-cnss.dtbo
 dtbo-y += sun-kiwi-cnss-v8.dtbo
@@ -91,11 +115,22 @@ dtbo-y += hamoa_la-kiwi-qcp-cnss.dtbo
 endif
 endif
 
+ifeq ($(CONFIG_ARCH_MAHUA),y)
+dtbo-y += mahua-wcn7760-cnss.dtbo
+dtbo-y += mahua-kiwi-cnss.dtbo
+endif
+
+ifeq ($(CONFIG_ARCH_WAIPIO),y)
+dtbo-y += waipio-kiwi-cnss.dtbo
+dtbo-y += waipio-qca6490-cnss.dtbo
+endif
+
 ifeq ($(CONFIG_ARCH_RAVELIN),y)
 dtbo-y += ravelin-idp-adrastea.dtbo
 dtbo-y += ravelin-qrd-adrastea.dtbo
 dtbo-y += ravelin-atp-adrastea.dtbo
 dtbo-y += ravelin-qca6490-cnss.dtbo
+dtbo-y += ravelin-qca6490-cnss-fp.dtbo
 dtbo-y += ravelin-qca6750-icnss.dtbo
 endif
 
@@ -112,11 +147,14 @@ endif
 
 ifeq ($(CONFIG_ARCH_PEBBLE),y)
 dtbo-y += pebble-atp-fig.dtbo
-dtbo-y += pebble-cdp-fig.dtbo
 dtbo-y += pebble-mtp-fig.dtbo
+ifneq ($(TARGET_BOARD_PLATFORM),pebble-le)
+dtbo-y += pebble-cdp-fig.dtbo
 dtbo-y += pebble-qrd-fig.dtbo
 dtbo-y += pebble-rcm-fig.dtbo
+endif
 dtbo-y += pebble-cdp-wcn7750.dtbo
+dtbo-y += pebble-hdk-wcn7750.dtbo
 dtbo-y += pebble-mtp-wcn7750.dtbo
 dtbo-y += pebble-qrd-wcn7750.dtbo
 dtbo-y += pebble-rcm-wcn7750.dtbo

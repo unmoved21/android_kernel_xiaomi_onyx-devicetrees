@@ -12,6 +12,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. SeraphP QAR WLAN";
 	compatible = "qcom,seraphp-qar", "qcom,seraphp", "qcom,qar";
-	qcom,msm-id = <673 0x10000>;
-	qcom,board-id = <0x1002C 0>, <0x1002C 1>;
+	qcom,msm-id = <673 0x10000>, <673 0x10001>;
+	qcom,board-id = <0x1002C 0>, <0x1002C 1>, <0x1002C 2>;
 };

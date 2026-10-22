@@ -29,7 +29,7 @@
 		qcom,iommu-faults = "stall-disable", "HUPCF", "non-fatal";
 		qcom,wlan-msa-fixed-region = <&wlan_msa_mem>;
 		qcom,wlan;
-		memory-region = <&icnss_iommu_region>;
+		memory-region = <&icnss2_iommu_region_partition>;
 		vdd-cx-mx-supply = <&L7A>;
 		vdd-1.8-xo-supply = <&L13A>;
 		vdd-1.3-rfa-supply = <&L10A>;
@@ -44,8 +44,9 @@
 					  "qcom,smp2p-early-crash-ind";
 		};
 
-		icnss_iommu_region: icnss_iommu_region {
-			iommu-addresses = <&icnss 0xa0000000 0x10000000>;
+		icnss2_iommu_region_partition: icnss2_iommu_region_partition {
+			iommu-addresses = <&icnss 0x00000000 0xa0000000>,
+					<&icnss 0xB0000000 0x50000000>;
 		};
 	};
 };

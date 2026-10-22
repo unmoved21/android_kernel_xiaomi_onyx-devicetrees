@@ -11,6 +11,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. Pebble RCM + KIWI + Pandeiro";
 	compatible = "qcom,pebble-rcm", "qcom,pebblep-rcm", "qcom,rcm", "qcom,pebble", "qcom,pebblep";
-	qcom,msm-id = <735 0x10000>, <741 0x10000>;
+	qcom,msm-id = <735 0x10000>, <735 0x10001>, <741 0x10000>, <741 0x10001>;
 	qcom,board-id = <0x30015 0x0>;
 };

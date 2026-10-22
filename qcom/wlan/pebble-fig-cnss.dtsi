@@ -122,7 +122,6 @@
 		qcom,sw-ctrl-data-0-gpio = <&tlmm 155 0>;
 		qcom,sw-ctrl-data-1-gpio = <&tlmm 156 0>;
 		cnss-direct-cx-host-sol-init-gpio = <&tlmm 204 0>;
-		wlan-dev-sol-gpio = <&tlmm 205 0>;
 		/* List of GPIOs to be setup for interrupt wakeup capable */
 		mpm_wake_set_gpios = <18 19>;
 		pinctrl-names = "wlan_en_active", "wlan_en_sleep", "sw_ctrl",
@@ -141,12 +140,15 @@
 		qcom,same-dt-multi-dev;
 		/* For AOP communication, use direct QMP instead of mailbox */
 		qcom,qmp = <&aoss_qmp>;
-		msix-match-addr = <0x3000>;
 		platform-name-required;
+		caldb-rddm-reuse-supported;
 		fig-direct-cx;
 		/*Direct CX in data pin PDC mode*/
 		cx-mode = <2>;
 		cx-reg-name = "S3C0";
+		qcom,pmic-auto-headroom = <24>;
+		qcom,wake-voltage-drop-adjustment = <0>;
+		qcom,sleep-voltage-drop-adjustment = <0>;
 
 		vdd-wlan-aon-supply = <&L2D>;
 		qcom,vdd-wlan-aon-config = <1800000 2000000 30000 0 1>;
@@ -174,27 +176,27 @@
 		/** ICC Path 1 (SNOC/ANOC) **/
 		<0 0>, /* no vote */
 		/* idle: 0-18 Mbps snoc/anoc: 120 Mhz */
-		<2250 308000>,
+		<2250 616000>,
 		/* low: 18-60 Mbps snoc/anoc: 120 Mhz */
-		<7500 308000>,
+		<7500 616000>,
 		/* medium: 60-240 Mbps snoc/anoc: 120 Mhz */
-		<30000 308000>,
+		<30000 616000>,
 		/* high: 240-1200 Mbps snoc/anoc: 120 Mhz */
-		<150000 308000>,
-		/* very high: > 1200 Mbps snoc/anoc: 403 Mhz */
-		<180000 2130000>,
-		/* ultra high: DBS mode snoc/anoc: 403 Mhz */
-		<325000 2130000>,
-		/* super high: DBS mode snoc/anoc: 533 Mhz */
-		<625000 6450000>,
-		/* low (latency critical): 18-60 Mbps snoc/anoc: 200 Mhz */
-		<7500 1610000>,
-		/* mid high: 800-1200 Mbps snoc/anoc: 200 Mhz */
 		<150000 616000>,
+		/* very high: > 1200 Mbps snoc/anoc: 403 Mhz */
+		<180000 4260000>,
+		/* ultra high: DBS mode snoc/anoc: 403 Mhz */
+		<325000 4260000>,
+		/* super high: DBS mode snoc/anoc: 533 Mhz */
+		<625000 12900000>,
+		/* low (latency critical): 18-60 Mbps snoc/anoc: 200 Mhz */
+		<7500 3220000>,
+		/* mid high: 800-1200 Mbps snoc/anoc: 200 Mhz */
+		<150000 1232000>,
 		/* fast: > 5000 Mbps snoc/anoc: 533 Mhz */
-		<937500 6450000>,
+		<937500 12900000>,
 		/* super fast: > 7500 Mbps snoc/anoc: 533 Mhz */
-		<1250000 6450000>,
+		<1250000 12900000>,
 
 		/** ICC Path 2 **/
 		<0 0>,
@@ -221,6 +223,24 @@
 		/* super fast: > 7500 Mbps ddr: 4224 GHz */
 		<1250000 16896000>;
 
+		qcom,vreg_pdc_map =
+			"S3C0", "bb",
+			"S1J1", "rf",
+			"S7G0", "rf",
+			"S4C0", "rf";
+
+		qcom,pmu_vreg_map =
+			"VDDD_AON_0P9", "S1J1",
+			"VDDA_RFA_0P9", "S1J1",
+			"VDDA_RFA_1P9", "S4C0",
+			"VDDA_RFA_1P3", "S7G0",
+			"VDDD_WLMX_0P9", "S1J1",
+			"VDDD_WLCX_0P9", "S3C0",
+			"VDDD_BTCX_0P9", "S1J1",
+			"VDDD_BTCMX_0P9", "S1J1",
+			"VDDA_PCIE_0P9", "S7G0",
+			"VDDA_PCIE_1P2", "S7G0";
+
 		/* PDC delta wrt to default attach.
 		 * RF PDC config delta
 		 * voltage change on S7G and S4C
@@ -235,16 +255,22 @@
 		 */
 		qcom,pdc_init_table =
 			 " {class: wlan_pdc, ss: rf, res: S7G0.v, upval: 1328}",
-			 " {class: wlan_pdc, ss: rf, res: S7G0.v, dwnval: 1328}",
+			 " {class: wlan_pdc, ss: rf, res: S7G0.v, dwnval: 1248}",
 			 " {class: wlan_pdc, ss: rf, res: S4C0.v, upval: 1876}",
-			 " {class: wlan_pdc, ss: rf, res: S4C0.v, dwnval: 1876}",
+			 " {class: wlan_pdc, ss: rf, res: S4C0.v, dwnval: 1824}",
 			 " {class: wlan_pdc, ss: rf, res: S9D0.m, enable: 0}",
 			 " {class: wlan_pdc, ss: rf, res: S9D0.v, enable: 0}",
+			 " {class: wlan_pdc, ss: rf, res: S3C0.m, enable: 0}",
 			 " {class: wlan_pdc, ss: rf, res: S3C0.e, enable: 0}",
 			 " {class: wlan_pdc, ss: rf, res: S1J1.m, enable: 1}",
 			 " {class: wlan_pdc, ss: rf, res: S1J1.v, enable: 1}",
 			 " {class: wlan_pdc, ss: rf, res: L3K1.m, dwnval: 3}",
-			 " {class: wlan_pdc, ss: bb, res: pdc, enable: 1}";
+			 " {class: wlan_pdc, ss: bb, res: pdc, enable: 1}",
+			 /* Enable Strong PD for FIG WLAN attach on Pebble
+			  * PMIC: PMH0104_C (sid=2), reg: S3_CTRL_PD_CTL (base=0xA100, offset=0xA0)
+			  * 0x88 = bit[7] STRONG_PD_EN=1, bit[6] WEAK_PD_EN=0, bit[3] LEAK_PD_EN=1
+			  */
+			 " {class: pmic, bid: 0, sid: 2, addr: 0xA1A0, value: 0x88}";
 
 		/* cpu mask used for wlan tx rx interrupt affinity
 		 * <cpumask_for_rx_interrupts cpumask_for_tx_comp_interrupts>
@@ -272,6 +298,11 @@
 			iommu-addresses = <&wlan_direct_link 0x0 0x0 0x0 0x88000000>,
 				<&wlan_direct_link 0x0 0xb0000000 0x0 0x50000000>;
 		};
+	};
+
+	wlan_vendor_wonder: qcom,cnss-vendor-wlan-wonder {
+		compatible = "qcom,cnss-vendor-wlan-wonder";
+		status = "okay";
 	};
 };
 

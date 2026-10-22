@@ -113,8 +113,8 @@
 		qcom,same-dt-multi-dev;
 		/* For AOP communication, use direct QMP instead of mailbox */
 		qcom,qmp = <&aoss_qmp>;
-		msix-match-addr = <0x3000>;
 		platform-name-required;
+		caldb-rddm-reuse-supported;
 		qcom,pmic-auto-headroom = <24>;
 
 		vdd-wlan-aon-supply = <&L2G>;

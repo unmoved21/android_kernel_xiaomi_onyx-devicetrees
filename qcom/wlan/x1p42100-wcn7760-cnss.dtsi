@@ -1,0 +1,101 @@
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/interconnect/qcom,x1p42100-rpmh.h>
+
+&tlmm {
+	cnss_pins {
+		cnss_wlan_en_active: cnss_wlan_en_active {
+			mux {
+				pins = "gpio117";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio117";
+				drive-strength = <16>;
+				output-high;
+				bias-pull-up;
+			};
+		};
+
+		cnss_wlan_en_sleep: cnss_wlan_en_sleep {
+			mux {
+				pins = "gpio117";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio117";
+				drive-strength = <2>;
+				output-low;
+				bias-pull-down;
+			};
+		};
+	};
+};
+
+&reserved_memory {
+	cnss_wlan_mem: cnss_wlan_region {
+		compatible = "shared-dma-pool";
+		alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+		reusable;
+		alignment = <0x0 0x400000>;
+		size = <0x0 0x2000000>;
+	};
+};
+
+&soc {
+	wlan_wcn7760: qcom,cnss-wcn7760@b0000000 {
+		compatible = "qcom,cnss-cologne";
+		reg = <0x0 0xb0000000 0x0 0x10000>;
+		reg-names = "smmu_iova_ipa";
+
+		wlan-en-gpio = <&tlmm 117 0>;
+		pinctrl-names = "wlan_en_active", "wlan_en_sleep";
+		pinctrl-0 = <&cnss_wlan_en_active>;
+		pinctrl-1 = <&cnss_wlan_en_sleep>;
+
+		qcom,wlan;
+		qcom,wlan-rc-num = <4>;
+		qcom,wlan-ramdump-dynamic = <0x780000>;
+		cnss-enable-self-recovery;
+		qcom,wlan-cbc-enabled;
+		use-pm-domain;
+		qcom,same-dt-multi-dev;
+		platform-name-required;
+
+		vdd-wlan-m2-supply = <&vreg_wlan_3p3>;
+		qcom,vdd-wlan-m2-config = <3300000 3300000 0 0 0>;
+		/* 1: board-id from PCIe config space (SSID/SVID) */
+		qcom,board-id-src = <1>;
+		vdd-wlan-io-supply = <&L15B>;
+		qcom,vdd-wlan-io-config = <1800000 1800000 0 0 0>;
+	};
+
+	wlan_vendor_wonder: qcom,cnss-vendor-wlan-wonder {
+		compatible = "qcom,cnss-vendor-wlan-wonder";
+		status = "okay";
+	};
+};
+
+&pcie4_rp {
+	cnss_pci0: cnss_pci0 {
+		reg = <0 0 0 0 0>;
+		memory-region =
+			<&cnss_wlan_mem &cnss_pci0_iommu_region_partition>;
+		wlan-smmuv3;
+
+		#address-cells = <2>;
+		#size-cells = <2>;
+
+		cnss_pci0_iommu_region_partition: cnss_pci0_iommu_region_partition {
+			/* address-cells =3 size-cells=2 from canoe-pcie.dtsi */
+			iommu-addresses = <&cnss_pci0 0x0 0x0 0x0 0x0 0x98000000>,
+					  <&cnss_pci0 0x0 0x0 0xB0000000 0x0 0x50000000>;
+		};
+	};
+};

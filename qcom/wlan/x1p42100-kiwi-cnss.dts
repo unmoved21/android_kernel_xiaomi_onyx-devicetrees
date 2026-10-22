@@ -12,6 +12,6 @@
 / {
 	model = "Qualcomm Technologies, Inc. X1P42100 SoC";
 	compatible = "qcom,x1p42100";
-	qcom,msm-id = <635 0x10000>, <635 0x20000>;
-	qcom,board-id = <0 0>;
+	qcom,msm-id = <635 0x10000>, <799 0x10000>;
+	 qcom,board-id = <40 0>;
 };

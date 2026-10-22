@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "art-fig-cnss.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. ArtP HDK + QRD SKU1 + PMR735D removed";
+	compatible = "qcom,artp-hdk", "qcom,artp", "qcom,hdk";
+	qcom,msm-id = <707 0x10000>, <707 0x20000>, <708 0x10000>, <708 0x20000>;
+	qcom,board-id = <0x1001f 0>;
+};
+
+&wlan_fig {
+	/delete-property/ vdd-wlan-ant-share-supply;
+	/delete-property/ qcom,vdd-wlan-ant-share-config;
+	/delete-property/ qcom,pdc_mode_vote_table;
+};

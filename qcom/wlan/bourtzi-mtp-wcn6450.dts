@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "bourtzi-wcn6450.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Bourtzi MTP + evros + cottid";
+	compatible = "qcom,bourtzi-mtp", "qcom,bourtzip-mtp", "qcom,bourtzi", "qcom,bourtzip", "qcom,mtp";
+	qcom,msm-id = <776 0x10000>, <777 0x10000>;
+	qcom,board-id = <0x20008 0x0>;
+};
+
