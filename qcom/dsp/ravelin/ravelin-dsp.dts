@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 /*
- * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 /dts-v1/;
 /plugin/;
@@ -11,6 +11,7 @@
 	model = "Qualcomm Technologies, Inc. ravelin v1 SoC";
 	compatible = "qcom,ravelin";
 	qcom,msm-id = <568 0x10000>, <602 0x10000>, <654 0x10000>,
-                      <653 0x10000>, <581 0x10000>, <582 0x10000>;
+                      <653 0x10000>, <581 0x10000>, <582 0x10000>,
+                      <773 0x10000>, <774 0x10000>;
 	qcom,board-id = <0 0>, <0x1000B 0>, <0x1000B 0x600>, <33 0>, <34 0>, <34 0x601>, <34 2>, <0x10022 3>;
 };
