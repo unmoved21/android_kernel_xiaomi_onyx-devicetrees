@@ -1,0 +1,42 @@
+// SPDX-License-Identifier: BSD-3-Clause
+
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interconnect/qcom,kera.h>
+#include <dt-bindings/clock/qcom,rpmh.h>
+
+&pm8550vs_g_gpios {
+	bt_en: bt_en {
+		pins = "gpio4";
+		function = "normal";
+		input-disable;
+		output-enable;
+		bias-disable;
+		power-source = <2>;
+	};
+};
+
+&soc {
+	bluetooth: bt_wcn7760 {
+		compatible = "qcom,wcn-m2";
+
+		pinctrl-names = "bt_en";
+		pinctrl-0 = <&bt_en>;
+
+		qcom,bt-reset-gpio   = <&pm8550vs_g_gpios 4 0>; /* WCN_BT_EN */
+
+	};
+
+	i2s_support: i2s_support {
+		compatible = "qcom,btfmi2s";
+	};
+};
+
+//uart instance
+&qupv3_se5_4uart {
+	status = "ok";
+};
+
