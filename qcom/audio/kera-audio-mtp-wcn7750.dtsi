@@ -1,0 +1,15 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "kera-audio-mtp.dtsi"
+
+&lpass_bt_swr {
+	status = "okay";
+};
+
+&kera_snd {
+	qcom,tdm-audio-intf = <1>;
+	qcom,wcn-bt = <1>;
+};
